@@ -8,13 +8,17 @@ import { UserComponent } from './components/user/user.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule} from "@angular/forms";
 import { ViewUserComponent } from './components/view-user/view-user.component';
+import { CallbackComponent } from './components/callback/callback.component';
+import {AuthService} from "./services/auth.service";
+import {AuthGuard} from "./services/auth.guard";
 
 @NgModule({
   declarations: [
     AppComponent,
     UserComponent,
     HomeComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    CallbackComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +26,7 @@ import { ViewUserComponent } from './components/view-user/view-user.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

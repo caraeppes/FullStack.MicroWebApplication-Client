@@ -14,11 +14,17 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   getUsers(){
-    return this.http.get('/server/api/users');
+    let token = localStorage.getItem('access_token');
+    return this.http.get('/server/api/users',
+      {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}
+    );
   }
 
   getUser(id: number){
-    return this.http.get('/server/api/users/' + id);
+    let token = localStorage.getItem('access_token');
+    return this.http.get('/server/api/users/' + id,
+      {headers: new HttpHeaders().set('Authorization', 'Bearer ' + token)}
+    );
   }
 
   createUser(user){
