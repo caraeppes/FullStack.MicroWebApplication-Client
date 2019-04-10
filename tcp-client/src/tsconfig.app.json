@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "types": []
+  },
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts",
+    "../node_modules/ng2-stomp-service/dist/stomp.service.ts",
+    "polyfills.ts",
+    "main.ts",
+    "app/components/login/login.module.ts",
+    "app/components/home/home.module.ts",
+    "app/components/users/users.module.ts"
+  ]
+
+}
