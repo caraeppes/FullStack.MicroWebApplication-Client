@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Channel} from "../channel";
-import { Observable, of } from 'rxjs';
-import { MessageService } from './message.service';
-import { HttpClient, HttpHeaders} from "@angular/common/http";
-import {tap} from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {Channel} from "../channel";
+import {Observable, of} from 'rxjs';
+import {MessageService} from './message.service';
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError, map, tap} from 'rxjs/operators';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
 };
 
 @Injectable({
@@ -14,20 +14,29 @@ const httpOptions = {
 })
 export class ChannelService {
 
+  private channelsUrl = '/server/channels';
+
   constructor(private messageService: MessageService,
-              private http : HttpClient) { }
+              private http: HttpClient) {
+  }
 
   getChannels(): Observable<Channel[]> {
-    this.messageService.add('ChannelService: fetched channels');
-    return this.http.get<Channel[]>('/server/channels');
+    return this.http.get<Channel[]>(this.channelsUrl)
+      .pipe(
+        tap(_ => this.log('fetched channels')),
+        catchError(this.handleError<Channel[]>('getChannels', []))
+      );
   }
 
-  getChannel(id : number): Observable<Channel>{
-    this.messageService.add(`ChannelService: fetched channel id=${id}`);
-    return this.http.get<Channel>(`/server/channels/${id}`);
+  getChannel(id: number): Observable<Channel> {
+    const url = `${this.channelsUrl}/${id}`;
+    return this.http.get<Channel>(url).pipe(
+      tap(_ => this.log(`fetched channel id=${id}`)),
+      catchError(this.handleError<Channel>(`getChannel id=${id}`))
+    );
   }
 
-  addChannel(channel : Channel): Observable<Channel> {
+  addChannel(channel: Channel): Observable<Channel> {
     return this.http.post<Channel>(`/server/channels`, channel, httpOptions).pipe(
       tap((newChannel: Channel) => this.messageService.add(`added channel with id = ${newChannel.id}`))
     );
@@ -41,8 +50,21 @@ export class ChannelService {
   }
 
   updateChannel(channel: Channel): Observable<any> {
-    return this.http.put(`/server/channels`, channel, httpOptions).pipe(
-      tap(_ => this.messageService.add(`updated channel id=${channel.id}`))
+    return this.http.put(this.channelsUrl, channel, httpOptions).pipe(
+      tap(_ => this.log(`updated channel id=${channel.id}`)),
+      catchError(this.handleError<any>('updateChannel'))
     );
+  }
+
+  private log(message: string) {
+    this.messageService.add(`ChannelService: ${message}`);
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error);
+      this.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 }

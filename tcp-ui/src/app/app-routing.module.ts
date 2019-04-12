@@ -5,17 +5,15 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ChannelDetailComponent} from "./components/channel-detail/channel-detail.component";
 
 const routes: Routes = [
-  {path: 'channels', component: ChannelsComponent},
-  {path: 'dashboard', component: DashboardComponent},
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
-  {path: 'detail/:id', component: ChannelDetailComponent}
+  {path: 'dashboard', component: DashboardComponent},
+  {path: 'detail/:id', component: ChannelDetailComponent},
+  {path: 'channels', component: ChannelsComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [
-    RouterModule
-  ]
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+
+export class AppRoutingModule {}
