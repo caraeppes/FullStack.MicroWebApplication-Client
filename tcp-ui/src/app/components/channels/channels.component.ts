@@ -11,17 +11,29 @@ export class ChannelsComponent implements OnInit {
 
   channels: Channel[];
 
-  getChannels(): void {
-    this.channelService.getChannels()
-      .subscribe(channels => this.channels = channels);
-  }
-
   constructor(private channelService: ChannelService) { }
 
   ngOnInit() {
     this.getChannels();
 
   }
+  getChannels(): void {
+    this.channelService.getChannels()
+      .subscribe(channels => this.channels = channels);
+  }
 
+  add(channelName: string): void {
+    channelName = channelName.trim();
+    if (!channelName) { return;}
+    this.channelService.addChannel({channelName} as Channel)
+      .subscribe(channel => {
+        this.channels.push(channel);
+      });
+  }
+
+  delete(channel: Channel): void {
+    this.channels = this.channels.filter(c => c !== channel);
+    this.channelService.deleteChannel(channel).subscribe();
+  }
 
 }
