@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {User} from "./models/user";
+import {Router} from "@angular/router";
+import {AuthenticationService} from "./services/authentication.service";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tcp-ui';
+  title = 'TCP Chat App';
 }

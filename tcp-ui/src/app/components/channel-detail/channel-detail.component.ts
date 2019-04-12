@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Channel} from "../../channel";
+import { Channel} from "../../models/channel";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ChannelService} from "../../services/channel.service";

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Channel} from "../channel";
+import {Channel} from "../models/channel";
 import {Observable, of} from 'rxjs';
 import {MessageService} from './message.service';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
@@ -48,6 +48,7 @@ export class ChannelService {
       tap(_ => this.messageService.add(`deleted channel id=${id}`))
     );
   }
+
 
   updateChannel(channel: Channel): Observable<any> {
     return this.http.put(this.channelsUrl, channel, httpOptions).pipe(

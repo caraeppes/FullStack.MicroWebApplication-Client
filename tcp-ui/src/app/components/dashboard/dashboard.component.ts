@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Channel} from "../../channel";
+import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 
 @Component({
@@ -18,6 +18,6 @@ export class DashboardComponent implements OnInit {
 
   getChannels(): void {
     this.channelService.getChannels()
-      .subscribe(channels => this.channels = channels.slice(1, 5));
+      .subscribe(channels => this.channels = channels.slice(0, 5));
   }
 }
