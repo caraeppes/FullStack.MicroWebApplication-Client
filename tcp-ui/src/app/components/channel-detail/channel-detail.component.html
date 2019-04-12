@@ -1,0 +1,11 @@
+<div *ngIf="channel">
+
+  <h2>{{channel.channelName | uppercase}} Details</h2>
+  <div><span>id: </span>{{channel.id}}</div>
+  <div>
+    <label>channelName:
+      <input [(ngModel)]="channel.channelName" placeholder="channelName"/>
+    </label>
+  </div>
+  <button (click)="goBack()">go back</button>
+</div>

@@ -1,26 +1,21 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {UserComponent} from "./components/user/user.component";
-import { ViewUserComponent} from "./components/view-user/view-user.component";
-import {HomeComponent} from "./components/home/home.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {ChannelsComponent} from "./components/channels/channels.component";
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
+import {ChannelDetailComponent} from "./components/channel-detail/channel-detail.component";
 
 const routes: Routes = [
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'users/view/:id',
-    component: ViewUserComponent
-  },
-  {
-    path: 'users',
-    component: UserComponent
-  }
+  {path: 'channels', component: ChannelsComponent},
+  {path: 'dashboard', component: DashboardComponent},
+  {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
+  {path: 'detail/:id', component: ChannelDetailComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [
+    RouterModule
+  ]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
