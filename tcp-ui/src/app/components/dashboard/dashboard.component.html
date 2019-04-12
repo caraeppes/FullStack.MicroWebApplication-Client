@@ -1,0 +1,9 @@
+<h3>Top Channels</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let channel of channels" class="col-1-4"
+    routerLink="/detail/{{channel.id}}">
+    <div class="module channel">
+      <h4>{{channel.channelName}}</h4>
+    </div>
+  </a>
+</div>
