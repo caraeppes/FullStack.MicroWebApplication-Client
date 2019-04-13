@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Channel} from "../../channel";
+import { Channel} from "../../models/channel";
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { ChannelService} from "../../services/channel.service";
@@ -9,8 +9,8 @@ import { ChannelService} from "../../services/channel.service";
   templateUrl: './channel-detail.component.html',
   styleUrls: ['./channel-detail.component.css']
 })
-export class ChannelDetailComponent implements OnInit {
 
+export class ChannelDetailComponent implements OnInit {
   channel: Channel;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -19,6 +19,7 @@ export class ChannelDetailComponent implements OnInit {
 
   ngOnInit() {
     this.getChannel();
+
   }
 
   getChannel(): void {
@@ -29,5 +30,10 @@ export class ChannelDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    this.channelService.updateChannel(this.channel)
+      .subscribe(() => this.goBack());
   }
 }
