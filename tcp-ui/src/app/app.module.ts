@@ -11,6 +11,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import {LoginComponent} from "./components/login/login.component";
+import {ChatComponent} from "./components/chat/chat.component";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {LoginComponent} from "./components/login/login.component";
     DashboardComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

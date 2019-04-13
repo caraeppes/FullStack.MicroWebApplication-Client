@@ -1,0 +1,6 @@
+export class Message {
+  id: number;
+  channel: string;
+  sender: string;
+  messageContent: string;
+}
