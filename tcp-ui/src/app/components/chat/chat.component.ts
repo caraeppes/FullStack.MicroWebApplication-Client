@@ -1,64 +1,53 @@
 import {Component, OnInit} from '@angular/core';
 import * as Stomp from 'stompjs';
 import {Message} from "../../models/message";
+import {UserService} from "../../services/user.service";
+import {Subscription} from "rxjs";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit{
 
   messages: string[] = [];
-  showConversation: boolean = false;
   ws: any;
-  name: string;
-  disabled: boolean;
+  message: string;
+  currentUser: string;
 
-  constructor(){}
+  constructor(private appComponent: AppComponent){
+  }
 
   connect() {
-    //connect to stomp where stomp endpoint is exposed
     let socket = new WebSocket("ws://localhost:8081/chat");
     this.ws = Stomp.over(socket);
     let that = this;
     this.ws.connect({}, function() {
-      that.ws.subscribe("/errors", function(message) {
-        alert("Error " + message.body);
-      });
       that.ws.subscribe("/topic/reply", function(message) {
-        that.showGreeting((JSON.parse(message.body) as Message).messageContent);
+        that.showMessage((JSON.parse(message.body) as Message).sender + ": " +
+          (JSON.parse(message.body) as Message).messageContent
+        );
       });
-      that.disabled = true;
-    }, function(error) {
-      alert("STOMP error " + error);
     });
   }
 
-  disconnect() {
-    if (this.ws != null) {
-      this.ws.ws.close();
-    }
-    this.setConnected(false);
-    console.log("Disconnected");
-  }
-
-  sendName() {
+  sendMessage() {
     let data = JSON.stringify({
-      'name' : this.name
-    })
-    this.ws.send("/app/message", {}, JSON.stringify({'channel':'chatter', 'sender':'Cara',
-    'messageContent':'hello!!!'} as Message));
+      'channel':'public',
+      'sender':this.currentUser,
+      'messageContent':this.message
+    });
+    this.ws.send("/app/message", {}, data as Message);
   }
 
-  showGreeting(message: string) {
-    this.showConversation = true;
+  showMessage(message: string) {
     this.messages.push(message)
   }
 
-  setConnected(connected) {
-    this.disabled = connected;
-    this.showConversation = connected;
-    this.messages = [];
+  ngOnInit(): void {
+    this.currentUser = this.appComponent.currentUser;
+    this.connect();
   }
 }
