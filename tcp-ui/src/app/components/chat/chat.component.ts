@@ -4,6 +4,7 @@ import {Message} from "../../models/message";
 import {UserService} from "../../services/user.service";
 import {Subscription} from "rxjs";
 import {AppComponent} from "../../app.component";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-chat',
@@ -16,8 +17,10 @@ export class ChatComponent implements OnInit{
   ws: any;
   message: string;
   currentUser: string;
+  chatForm: FormGroup;
 
-  constructor(private appComponent: AppComponent){
+  constructor(private appComponent: AppComponent,
+              private formBuilder: FormBuilder){
   }
 
   connect() {
@@ -34,12 +37,14 @@ export class ChatComponent implements OnInit{
   }
 
   sendMessage() {
+    this.message = this.chatForm.controls.message.value;
     let data = JSON.stringify({
       'channel':'public',
       'sender':this.currentUser,
       'messageContent':this.message
     });
     this.ws.send("/app/message", {}, data as Message);
+    this.message = '';
   }
 
   showMessage(message: string) {
@@ -47,6 +52,10 @@ export class ChatComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.chatForm = this.formBuilder.group({
+      message: ['', Validators.required]
+    });
+
     this.currentUser = this.appComponent.currentUser;
     this.connect();
   }
