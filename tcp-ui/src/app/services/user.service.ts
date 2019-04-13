@@ -47,9 +47,7 @@ export class UserService {
 
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, httpOptions).pipe(
-      tap((newUser: User) => this.log(`added User = ${newUser.username}`))
-    );
+    return this.http.post<User>(this.usersUrl, user, httpOptions);
   }
 
   deleteUser(user: User | number): Observable<User> {

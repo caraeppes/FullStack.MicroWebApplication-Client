@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
 import {User} from "./models/user";
 import {Router} from "@angular/router";
-import {AuthenticationService} from "./services/authentication.service";
-import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -10,5 +8,12 @@ import {UserService} from "./services/user.service";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  currentUser: User;
+
+  constructor(
+    private router: Router
+  ) {
+  }
   title = 'TCP Chat App';
 }
