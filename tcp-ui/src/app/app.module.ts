@@ -10,6 +10,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
+import {LoginComponent} from "./components/login/login.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { RegisterComponent } from './components/register/register.component';
     MessagesComponent,
     DashboardComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

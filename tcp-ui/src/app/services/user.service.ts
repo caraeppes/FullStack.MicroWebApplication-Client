@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
-import {Observable, of} from "rxjs";
+import {Observable, of, Subject} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 import {MessageService} from "./message.service";
 
@@ -15,6 +15,7 @@ const httpOptions = {
 export class UserService {
 
   private usersUrl = '/server/users';
+  currentUser: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient, private messageService: MessageService) {
   }
@@ -67,6 +68,10 @@ export class UserService {
       this.log(`${operation} failed: ${error.message}`);
       return of(result as T);
     };
+  }
+
+  changeCurrentUser(username: string) {
+    this.currentUser.next(username);
   }
 
 }

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {User} from "./models/user";
 import {Router} from "@angular/router";
+import {Subscription} from "rxjs";
+import {UserService} from "./services/user.service";
 
 @Component({
   selector: 'app-root',
@@ -9,11 +11,16 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
 
-  currentUser: User;
 
-  constructor(
-    private router: Router
-  ) {
+  currentUser: string;
+  currentUserSubscription: Subscription;
+
+  constructor(private router: Router,
+              private userService: UserService) {
+    this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
   }
+
   title = 'TCP Chat App';
 }

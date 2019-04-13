@@ -5,6 +5,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ChannelDetailComponent} from "./components/channel-detail/channel-detail.component";
 import {HomeComponent} from "./components/home/home.component";
 import {RegisterComponent} from "./components/register/register.component";
+import {LoginComponent} from "./components/login/login.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
@@ -12,7 +13,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'detail/:id', component: ChannelDetailComponent},
   {path: 'channels', component: ChannelsComponent},
-  {path: 'register', component: RegisterComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: 'login', component: LoginComponent}
 ];
 
 @NgModule({

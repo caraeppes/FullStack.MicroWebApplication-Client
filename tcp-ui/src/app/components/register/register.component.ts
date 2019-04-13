@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit() {
-    this.userService.registerUser(this.registerForm.value).subscribe(user => {
-      sessionStorage.setItem('currentUser', user.username);
+    this.userService.registerUser(this.registerForm.value).subscribe( user => {
+      this.userService.changeCurrentUser(user.username);
     });
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
 
   }
 

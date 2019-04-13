@@ -1,0 +1,29 @@
+<html>
+<head>
+  <title>Chat WebSocket</title>
+</head>
+
+
+
+<body onload="disconnect(), onload()">
+
+<div>
+
+  <div>
+
+    <p id="sender"></p>
+  </div>
+  <br />
+  <div>
+    <button id="connect" onclick="connect();">Connect</button></div>
+  <br />
+  <div id="conversationDiv">
+    <input type="text" id="messageContent" placeholder="Write a message..."/>
+    <button id="sendMessage" onclick="sendMessage();">Send</button>
+    <p id="response"></p>
+  </div>
+</div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
