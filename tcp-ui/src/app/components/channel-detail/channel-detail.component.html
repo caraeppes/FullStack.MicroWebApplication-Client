@@ -1,13 +1,19 @@
 <body>
 <div *ngIf="channel">
-  <h2>Channels</h2>
-  <div>channelName:
-      <input [(ngModel)]="channel.channelName" readonly>
-  </div>
-  <button (click)="goBack()">go back</button>
+
+  <h2>{{channel.channelName}} Channel</h2>
 </div>
-<br><br>
 <button (click)="addUser(currentUser);">
   Join Channel
 </button>
+<button (click)="goBack()">Go Back</button>
+
+<br>
+
+<ul>
+  <h4>Channel Members</h4>
+  <li *ngFor="let user of users">
+    <body>{{user}}</body>
+  </li>
+</ul>
 </body>
