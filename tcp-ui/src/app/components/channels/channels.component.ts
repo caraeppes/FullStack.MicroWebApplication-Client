@@ -23,8 +23,6 @@ export class ChannelsComponent implements OnInit {
   }
 
   add(channelName: string): void {
-    channelName = channelName.trim();
-    if (!channelName) { return;}
     this.channelService.addChannel({channelName} as Channel)
       .subscribe(channel => {
         this.channels.push(channel);

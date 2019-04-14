@@ -39,6 +39,14 @@ export class UserService {
     );
   }
 
+  joinChannel(username: string, channel: string): Observable<any> {
+    let user: User;
+    this.getUserByUsername(username).subscribe(data => {
+      user = data;
+    })
+    return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user, httpOptions);
+  }
+
   getUserByUsername(username: string): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/findusername/${username}`).pipe(
       tap(_ => this.log(`fetches user =${username}`)),
@@ -57,6 +65,8 @@ export class UserService {
       tap(_ => this.log(`deleted channel id=${id}`))
     );
   }
+
+
 
   private log(message: string) {
     this.messageService.add(`ChannelService: ${message}`);
