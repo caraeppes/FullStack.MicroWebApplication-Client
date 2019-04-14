@@ -3,14 +3,15 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class NotificationService {
-  messages: string[] = [];
 
-  add(message: string) {
-    this.messages.push(message);
+export class NotificationService {
+  notifications: string[] = [];
+
+  add(notification: string) {
+    this.notifications.push(notification);
   }
 
   clear() {
-    this.messages = [];
+    this.notifications = [];
   }
 }

@@ -12,11 +12,15 @@ import {AppComponent} from "../../app.component";
 })
 export class HomeComponent implements OnInit {
   currentUser: string;
+  currentUserSubscription: Subscription;
   users: User[] = [];
 
   constructor(
     private userService: UserService,
     private appComponent: AppComponent) {
+    this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   ngOnInit() {

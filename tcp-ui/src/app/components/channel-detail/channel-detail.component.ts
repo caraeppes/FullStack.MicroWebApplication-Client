@@ -1,11 +1,10 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Channel} from "../../models/channel";
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 import {ChannelService} from "../../services/channel.service";
 import {UserService} from "../../services/user.service";
 import {AppComponent} from "../../app.component";
-import {User} from "../../models/user";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
@@ -24,7 +23,8 @@ export class ChannelDetailComponent implements OnInit {
               private location: Location,
               private channelService: ChannelService,
               private userService: UserService,
-              private appComponent: AppComponent) {
+              private appComponent: AppComponent,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -45,16 +45,12 @@ export class ChannelDetailComponent implements OnInit {
     this.location.back();
   }
 
-  save(): void {
-    this.channelService.updateChannel(this.channel)
-      .subscribe(() => this.goBack());
-  }
-
   addUser(username: string) {
     this.userService.joinChannel(username, this.channel.channelName).subscribe(user => {
         this.channel.users.push(username);
       }
     );
+    this.notificationService.add(username + " has joined the channel!");
   }
 
   getUsers() {

@@ -9,9 +9,23 @@ body{
   font-style: normal;
   font-variant: normal;
   text-transform: none;
-  line-height: 15px;
+  line-height: 20px;
 }
 
+textarea
+{
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color:slateblue;
+  font-weight: 400;
+  text-decoration: none;
+  font-style: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 20px;
+}
 
 h1 {
   font-family: Tahoma, Geneva, sans-serif;
@@ -31,13 +45,41 @@ h2 {
   font-size: 30px;
   letter-spacing: 2px;
   word-spacing: 2.8px;
+  color: slateblue;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: capitalize;
+  padding: 10px 10px;
+  text-decoration: none;
+  line-height: 1px;
+}
+
+h3 {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 25px;
+  letter-spacing: 2px;
+  word-spacing: 2.8px;
   color: #039be5;
   font-style: normal;
   font-variant: small-caps;
   text-transform: capitalize;
   padding: 10px 10px;
   text-decoration: none;
-  line-height: 10px;
+  line-height: 1px;
+}
+
+h4 {
+  font-family: Tahoma, Geneva, sans-serif;
+  font-size: 20px;
+  letter-spacing: 2px;
+  word-spacing: 2.8px;
+  color: slateblue;
+  font-style: normal;
+  font-variant: small-caps;
+  text-transform: capitalize;
+  padding: 1px 1px;
+  text-decoration: none;
+  line-height: 0px;
 }
 
 nav a {
@@ -50,7 +92,7 @@ nav a {
   font-style: normal;
   font-variant: small-caps;
   text-transform: capitalize;
-  padding: 0px 50px;
+  padding: 10px 50px;
   text-decoration: none;
   margin-top: 1px;
   display: inline-block;

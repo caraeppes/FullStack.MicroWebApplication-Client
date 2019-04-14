@@ -9,6 +9,8 @@
   </nav>
 </div>
 <router-outlet></router-outlet>
+<app-notifications></app-notifications>
+
 <div *ngIf="currentUser">
   <button (click)="logout()">
     Logout
