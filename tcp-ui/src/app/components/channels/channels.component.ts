@@ -5,7 +5,7 @@ import { ChannelService} from "../../services/channel.service";
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.css']
+  styleUrls: ["../../app.component.css"]
 })
 export class ChannelsComponent implements OnInit {
 

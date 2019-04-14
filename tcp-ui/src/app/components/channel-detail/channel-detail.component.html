@@ -1,11 +1,9 @@
+<body>
 <div *ngIf="channel">
-  <h2>{{channel.channelName}} Details</h2>
-  <div><span>id: </span>{{channel.id}}</div>
-  <div>
-    <label>channelName:
-      <input [(ngModel)]="channel.channelName" placeholder="channelName"/>
-    </label>
+  <h2>Channels</h2>
+  <div>channelName:
+      <input [(ngModel)]="channel.channelName" readonly>
   </div>
   <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
 </div>
+</body>

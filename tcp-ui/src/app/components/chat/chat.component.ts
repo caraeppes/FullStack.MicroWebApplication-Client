@@ -9,7 +9,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ["../../app.component.css"]
 })
 export class ChatComponent implements OnInit{
 
@@ -45,6 +45,7 @@ export class ChatComponent implements OnInit{
     });
     this.ws.send("/app/message", {}, data as Message);
     this.message = '';
+    this.chatForm.reset();
   }
 
   showMessage(message: string) {

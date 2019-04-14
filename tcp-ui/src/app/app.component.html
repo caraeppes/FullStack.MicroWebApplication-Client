@@ -1,12 +1,19 @@
+<body>
 <h1>{{title}}</h1>
-<h2>Welcome {{currentUser}}!</h2>
-<nav>
-  <a routerLink="/home">Home</a>
-  <a routerLink="/dashboard">Dashboard</a>
-  <a routerLink="/channels">Channels</a>
-  <a routerLink="/register">Register</a>
-  <a routerLink="/login">Login</a>
-  <a routerLink="/chat">Chat</a>
+<div *ngIf="currentUser">
+  <nav>
+    <a routerLink="/home">Home</a>
+    <a routerLink="/channels">Channels</a>
+    <a routerLink="/chat">Chat</a>
 
-</nav>
+  </nav>
+</div>
 <router-outlet></router-outlet>
+
+<div *ngIf="currentUser">
+  <button (click)="logout()">
+    Logout
+  </button>
+</div>
+
+</body>

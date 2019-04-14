@@ -21,5 +21,13 @@ export class AppComponent {
     });
   }
 
-  title = 'TCP Chat App';
+  title = 'Tcp Chat App';
+
+  logout(){
+    this.userService.changeCurrentUser(null);
+    this.currentUser = null;
+    this.router.navigate(['/login']);
+  }
 }
+
+
