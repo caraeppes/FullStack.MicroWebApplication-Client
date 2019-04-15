@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import * as Stomp from 'stompjs';
 import {Message} from "../../models/message";
-import {UserService} from "../../services/user.service";
-import {Subscription} from "rxjs";
 import {AppComponent} from "../../app.component";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-chat',
@@ -16,11 +14,10 @@ export class ChatComponent implements OnInit {
   messages: string[] = [];
   ws: any;
   message: string;
-  currentUser: string;
-  chatForm: FormGroup;
+  currentUser: User;
+  channel: string;
 
-  constructor(private appComponent: AppComponent,
-              private formBuilder: FormBuilder) {
+  constructor(private appComponent: AppComponent){
   }
 
   connect() {
@@ -29,7 +26,7 @@ export class ChatComponent implements OnInit {
     let that = this;
     this.ws.connect({}, function () {
       that.ws.subscribe("/topic/reply", function (message) {
-        that.showMessage((JSON.parse(message.body) as Message).sender + ": " +
+        that.showMessage((JSON.parse(message.body)).sender + ": " +
           (JSON.parse(message.body) as Message).messageContent
         );
       });
@@ -39,8 +36,8 @@ export class ChatComponent implements OnInit {
   sendMessage() {
     let data = JSON.stringify({
       'channel': 'public',
-      'sender': this.currentUser,
-      'messageContent': this.message
+      'sender': this.currentUser.username,
+      'messageContent': this.message.trim()
     });
     this.ws.send("/app/message", {}, data as Message);
     this.message = '';
@@ -53,11 +50,6 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.appComponent.currentUser;
     this.connect();
-  }
-
-  private handleKeyDown(event: any) {
-    if (event.key == 13) {
-      this.sendMessage();
-    }
+    this.channel = this.appComponent.currentChannel;
   }
 }

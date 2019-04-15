@@ -1,21 +1,17 @@
 <body>
 <h2>Channels</h2>
 <div>
-  <label>Channel name:
+  <label>Create a channel:<br>
   <input #channelName/>
   </label>
-  <button (click)="add(channelName.value); channelName.value=''">
-    add
-  </button>
+  <button (click)="add(channelName.value); channelName.value=''">add</button>
 </div>
 
 <ul class="channels">
   <li *ngFor="let channel of channels">
-    <a routerLink="/detail/{{channel.id}}">
-      <span class="badge">{{channel.id}}</span> {{channel.channelName}}
+    <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel.channelName)">
+      {{channel.channelName}}
     </a>
-    <button class="delete" title="delete channel"
-            (click)="delete(channel)">delete</button>
   </li>
 </ul>
 

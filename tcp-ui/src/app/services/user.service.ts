@@ -22,7 +22,7 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  getUsersSubscribedToChannel(channelId: number){
+  getUsersSubscribedToChannel(channelId: number): Observable<User[]>{
     return this.http.get<User[]>(`${this.usersUrl}/findByChannel/${channelId}`);
   }
 
@@ -53,7 +53,10 @@ export class UserService {
   }
 
   changeCurrentUser(username: string) {
-    this.currentUser.next(username);
+    this.getUserByUsername(username).subscribe(user => {
+      this.currentUser.next(user);
+    });
   }
+
 
 }

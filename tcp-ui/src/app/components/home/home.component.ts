@@ -11,9 +11,10 @@ import {AppComponent} from "../../app.component";
   styleUrls: ["../../app.component.css"]
 })
 export class HomeComponent implements OnInit {
-  currentUser: string;
+  currentUser: User;
   currentUserSubscription: Subscription;
   users: User[] = [];
+
 
   constructor(
     private userService: UserService,

@@ -34,4 +34,7 @@ export class ChannelsComponent implements OnInit {
     this.channelService.deleteChannel(channel).subscribe();
   }
 
+  updateChannel(channel: string): void {
+    this.channelService.updateCurrentChannel(channel);
+  }
 }

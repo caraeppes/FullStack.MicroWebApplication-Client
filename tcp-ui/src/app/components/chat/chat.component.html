@@ -1,11 +1,11 @@
+
+
 <body>
 <div id="main-content" class="container">
   <p>
     <label>Type your message and hit Enter key to send!</label><br><br>
-      <textarea name="message"rows="4" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)] = "message"></textarea>
+      <textarea name="message"rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)] = "message"></textarea>
   </p>
-<br>
-
 <div class="row">
   <table id="conversation" class="table table-striped">
     <h4>Messages</h4>
@@ -15,5 +15,7 @@
   </table>
 </div>
 </div>
+{{channel.channelName}}
 <br><br><br>
 </body>
+

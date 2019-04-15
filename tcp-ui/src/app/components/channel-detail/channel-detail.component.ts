@@ -6,6 +6,7 @@ import {ChannelService} from "../../services/channel.service";
 import {UserService} from "../../services/user.service";
 import {AppComponent} from "../../app.component";
 import {NotificationService} from "../../services/notification.service";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-channel-detail',
@@ -16,8 +17,8 @@ import {NotificationService} from "../../services/notification.service";
 export class ChannelDetailComponent implements OnInit {
   channel: Channel;
   channelId: number;
-  currentUser: string;
-  users: string[] = [];
+  currentUser: User;
+  users: User[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private location: Location,
@@ -31,7 +32,6 @@ export class ChannelDetailComponent implements OnInit {
     this.getChannel();
     this.currentUser = this.appComponent.currentUser;
     this.getUsers();
-
   }
 
   getChannel(): void {
@@ -45,19 +45,19 @@ export class ChannelDetailComponent implements OnInit {
     this.location.back();
   }
 
-  addUser(username: string) {
-    this.userService.joinChannel(username, this.channel.channelName).subscribe(user => {
-        this.channel.users.push(username);
+  addUser(user: User) {
+    this.userService.joinChannel(user.username, this.channel.channelName).subscribe(user => {
+        this.channel.users.push(user);
       }
     );
-    this.notificationService.add(username + " has joined the channel!");
+    this.notificationService.add(user.username + " has joined the channel!");
   }
 
   getUsers() {
     this.userService.getUsersSubscribedToChannel(this.channelId).subscribe(users => {
-      users.forEach(user => {
-      this.users.push(user.username);
-      });
+      this.users = users;
     });
-    }
+  }
+
+
 }
