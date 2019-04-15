@@ -7,6 +7,8 @@ import {UserService} from "../../services/user.service";
 import {AppComponent} from "../../app.component";
 import {NotificationService} from "../../services/notification.service";
 import {User} from "../../models/user";
+import {Message} from "../../models/message";
+import {MessageService} from "../../services/message.service";
 
 @Component({
   selector: 'app-channel-detail',
@@ -19,19 +21,22 @@ export class ChannelDetailComponent implements OnInit {
   channelId: number;
   currentUser: User;
   users: User[] = [];
+  messages: Message[] = [];
 
   constructor(private activatedRoute: ActivatedRoute,
               private location: Location,
               private channelService: ChannelService,
               private userService: UserService,
               private appComponent: AppComponent,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private messageService: MessageService) {
   }
 
   ngOnInit() {
     this.getChannel();
     this.currentUser = this.appComponent.currentUser;
     this.getUsers();
+    this.getMessages();
   }
 
   getChannel(): void {
@@ -59,5 +64,10 @@ export class ChannelDetailComponent implements OnInit {
     });
   }
 
+  getMessages(){
+    this.messageService.getMessagesByChannel(this.channel.channelName).subscribe(messages => {
+      this.messages = messages;
+    });
+  }
 
 }
