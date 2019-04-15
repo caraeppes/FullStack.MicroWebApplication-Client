@@ -3,22 +3,29 @@ import {User} from "../../models/user";
 import {Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {first} from "rxjs/operators";
+import {AppComponent} from "../../app.component";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ["../../app.component.css"]
 })
 export class HomeComponent implements OnInit {
   currentUser: User;
-  currentSubscription: Subscription;
+  currentUserSubscription: Subscription;
   users: User[] = [];
 
+
   constructor(
-    private userService: UserService) {
+    private userService: UserService,
+    private appComponent: AppComponent) {
+    this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    });
   }
 
   ngOnInit() {
+    this.currentUser = this.appComponent.currentUser;
     this.loadAllUsers();
   }
 

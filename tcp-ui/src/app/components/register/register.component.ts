@@ -1,21 +1,19 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder,  FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
-import {MessageService} from "../../services/message.service";
-import {User} from "../../models/user";
+import {NotificationService} from "../../services/notification.service";
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ["../../app.component.css"]
 })
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
   constructor(private userService: UserService,
-              private messageService: MessageService,
               private formBuilder: FormBuilder,
               private router: Router) {
   }
@@ -30,10 +28,10 @@ export class RegisterComponent implements OnInit {
 
 
   onSubmit() {
-    this.userService.registerUser(this.registerForm.value).subscribe(user => {
-      sessionStorage.setItem('currentUser', user.username);
+    this.userService.registerUser(this.registerForm.value).subscribe( user => {
+      this.userService.changeCurrentUser(user.username);
     });
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/home']);
 
   }
 

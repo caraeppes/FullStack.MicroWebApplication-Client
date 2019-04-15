@@ -1,11 +1,30 @@
+<body>
 <div *ngIf="channel">
-  <h2>{{channel.channelName}} Details</h2>
-  <div><span>id: </span>{{channel.id}}</div>
-  <div>
-    <label>channelName:
-      <input [(ngModel)]="channel.channelName" placeholder="channelName"/>
-    </label>
-  </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
+
+  <h2>{{channel.channelName}} Channel</h2>
 </div>
+<button (click)="addUser(currentUser);">
+  Join Channel
+</button>
+<button (click)="goBack()">Go Back</button>
+
+<br>
+
+<ul>
+  <h4>Channel Members</h4>
+  <li *ngFor="let user of users">
+    <body>{{user.username}}</body>
+  </li>
+</ul>
+
+
+
+<div *ngFor="let user of users">
+  <div *ngIf="user.username == currentUser.username">
+    <app-chat></app-chat>
+  </div>
+
+</div>
+
+
+</body>

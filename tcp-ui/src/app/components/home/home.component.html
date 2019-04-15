@@ -1,6 +1,13 @@
+<body>
+<h2>Welcome {{currentUser.username}}!</h2>
+<div *ngIf="!currentUser">
+    Click <a routerLink="/register">here</a> to create an account.<br><br>
+    Click <a routerLink="/login">here</a> to login.
+</div>
 <h3>All registered users:</h3>
 <ul>
   <li *ngFor="let user of users">
-    {{user.firstName}} {{user.lastName}}: {{user.username}}
+    <body>{{user.firstName}} {{user.lastName}}: {{user.username}}</body>
   </li>
 </ul>
+</body>

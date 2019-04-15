@@ -5,7 +5,7 @@ import { ChannelService} from "../../services/channel.service";
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
-  styleUrls: ['./channels.component.css']
+  styleUrls: ["../../app.component.css"]
 })
 export class ChannelsComponent implements OnInit {
 
@@ -23,8 +23,6 @@ export class ChannelsComponent implements OnInit {
   }
 
   add(channelName: string): void {
-    channelName = channelName.trim();
-    if (!channelName) { return;}
     this.channelService.addChannel({channelName} as Channel)
       .subscribe(channel => {
         this.channels.push(channel);
@@ -36,4 +34,7 @@ export class ChannelsComponent implements OnInit {
     this.channelService.deleteChannel(channel).subscribe();
   }
 
+  updateChannel(channel: string): void {
+    this.channelService.updateCurrentChannel(channel);
+  }
 }

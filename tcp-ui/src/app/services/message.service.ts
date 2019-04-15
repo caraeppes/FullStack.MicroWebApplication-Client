@@ -1,16 +1,24 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs";
+import {User} from "../models/user";
+import {Message} from "../models/message";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MessageService {
-  messages: string[] = [];
 
-  add(message: string) {
-    this.messages.push(message);
+  private messagesUrl = '/server/messages';
+
+  constructor(private http: HttpClient) { }
+
+  getMesages(): Observable<Message[]> {
+    return this.http.get<Message[]>(this.messagesUrl);
   }
 
-  clear() {
-    this.messages = [];
+  getMessagesByChannel(channel: string): Observable<Message[]>{
+    return this.http.get<Message[]>(`${this.messagesUrl}/findAll/${channel}`);
   }
+
 }

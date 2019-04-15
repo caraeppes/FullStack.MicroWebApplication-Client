@@ -1,0 +1,20 @@
+
+
+<body>
+<div id="main-content" class="container">
+  <p>
+    <label>Type your message and hit Enter key to send!</label><br><br>
+      <textarea name="message"rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)] = "message"></textarea>
+  </p>
+<div class="row">
+  <table id="conversation" class="table table-striped">
+    <h4>Messages</h4>
+    <div *ngFor="let singleMessage of messages">
+      {{singleMessage}}
+    </div>
+  </table>
+</div>
+</div>
+<br><br><br>
+</body>
+
