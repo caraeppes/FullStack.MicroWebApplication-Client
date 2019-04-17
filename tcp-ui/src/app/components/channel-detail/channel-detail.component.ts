@@ -16,6 +16,8 @@ import {MessageService} from "../../services/message.service";
   styleUrls: ["../../app.component.css"]
 })
 
+//testing
+
 export class ChannelDetailComponent implements OnInit {
   channel: Channel;
   channelId: number;
