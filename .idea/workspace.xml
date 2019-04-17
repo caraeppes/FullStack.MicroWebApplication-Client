@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b11b57e5-5aa3-4569-b57a-36dcf90fb258" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tcp-ui/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/tcp-ui/.gitignore" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -85,11 +85,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="83">
+            <state relative-caret-position="105">
               <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tcp-ui/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="261">
+              <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -102,15 +111,6 @@
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tcp-ui/src/app/models/channel.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="3" lean-forward="true" selection-start-line="7" selection-start-column="3" selection-end-line="7" selection-end-column="3" />
             </state>
           </provider>
         </entry>
@@ -159,7 +159,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tcp-ui/src/app/components/messages/messages.component.ts" />
         <option value="$PROJECT_DIR$/tcp-ui/src/app/components/dashboard/dashboard.component.css" />
         <option value="$PROJECT_DIR$/tcp-ui/src/app/components/channel-detail/channel-detail.component.css" />
         <option value="$PROJECT_DIR$/tcp-ui/src/app/models/user.js" />
@@ -210,6 +209,7 @@
         <option value="$PROJECT_DIR$/tcp-ui/src/app/components/channel-detail/channel-detail.component.ts" />
         <option value="$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.ts" />
         <option value="$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.html" />
+        <option value="$PROJECT_DIR$/tcp-ui/.gitignore" />
       </list>
     </option>
   </component>
@@ -241,81 +241,13 @@
               <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
               <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="e2e" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
               <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
               <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="channel-detail" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="channels" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="chat" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="home" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FullStack.MicroWebApplication-Client" type="b2602c69:ProjectViewProjectNode" />
-              <item name="FullStack.MicroWebApplication-Client" type="462c0819:PsiDirectoryNode" />
-              <item name="tcp-ui" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="environments" type="462c0819:PsiDirectoryNode" />
+              <item name="node_modules" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -385,12 +317,12 @@
       <workItem from="1555038842096" duration="6655000" />
       <workItem from="1555078502942" duration="3981000" />
       <workItem from="1555285259981" duration="22889000" />
-      <workItem from="1555420182545" duration="24014000" />
+      <workItem from="1555420182545" duration="24713000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="126302000" />
+    <option name="totallyTimeSpent" value="127001000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -403,6 +335,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="198" y="90" width="1053" height="663" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49624062" visible="true" weight="0.2868217" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -418,7 +351,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32749563" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50045747" side_tool="true" weight="0.22359155" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49954253" visible="true" weight="0.35901925" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49954253" visible="true" weight="0.35726795" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -465,7 +398,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tcp-ui/src/app/components/notfications/notifications.component.ts" />
     <entry file="file://$PROJECT_DIR$/tcp-ui/src/app/components/notification/notification.component.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -821,8 +753,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tcp-ui/src/app/components/chat/chat.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
+        <state relative-caret-position="105">
           <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tcp-ui/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="261">
+          <caret line="21" column="4" lean-forward="true" selection-start-line="21" selection-start-column="4" selection-end-line="21" selection-end-column="4" />
         </state>
       </provider>
     </entry>
