@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
+    "deploy": "git push origin master && git push heroku master",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

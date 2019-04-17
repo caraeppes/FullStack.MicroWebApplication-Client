@@ -1,5 +1,5 @@
 <body>
-<h2>Welcome {{currentUser.username}}!</h2>
+<h2>Welcome</h2> <h2 *ngIf="currentUser">{{currentUser.username}}</h2>
 <div *ngIf="!currentUser">
     Click <a routerLink="/register">here</a> to create an account.<br><br>
     Click <a routerLink="/login">here</a> to login.

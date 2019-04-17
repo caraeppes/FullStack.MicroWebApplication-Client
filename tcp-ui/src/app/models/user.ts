@@ -4,4 +4,8 @@ export class User {
   lastName: string;
   username: string;
   channels: string[];
+
+  constructor(){
+    this.username = "";
+  }
 }
