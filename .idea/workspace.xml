@@ -3,7 +3,15 @@
   <component name="FavoritesManager">
     <favorites_list name="FullStack.MicroWebApplication-Client" />
   </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="198" />
+    <option name="y" value="90" />
+    <option name="width" value="1053" />
+    <option name="height" value="663" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/tcp-ui/node_modules/typescript/lib" />
   </component>
 </project>
