@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
+import {forEach} from "@angular/router/src/utils/collection";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-channels',
@@ -11,7 +13,8 @@ export class ChannelsComponent implements OnInit {
 
   channels: Channel[];
 
-  constructor(private channelService: ChannelService) { }
+  constructor(private channelService: ChannelService,
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
     this.getChannels();
@@ -29,9 +32,10 @@ export class ChannelsComponent implements OnInit {
       });
   }
 
-  delete(channel: Channel): void {
-    this.channels = this.channels.filter(c => c !== channel);
-    this.channelService.deleteChannel(channel).subscribe();
+  delete(id: number): void {
+    this.channels = this.channels.filter(c => c.id !== id);
+    this.channelService.deleteChannel(id).subscribe();
+      this.notificationService.add("Deleted channel");
   }
 
   updateChannel(channel: string): void {

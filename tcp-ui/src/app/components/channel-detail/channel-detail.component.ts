@@ -60,12 +60,12 @@ export class ChannelDetailComponent implements OnInit {
         this.channel.users.push(user.username);
       }
     );
-    this.notificationService.add(user.username + " has joined the channel!");
+    this.notificationService.add(user.username + " joined " + this.channel.channelName + "!");
   }
 
   removeUser(user: User){
     this.userService.leaveChannel(user.username, this.channel.channelName).subscribe( u => {
-      console.log(u.username);
+      this.notificationService.add(user.username + "has left " + this.channel.channelName + "!")
     });
   }
 
