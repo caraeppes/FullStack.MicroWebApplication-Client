@@ -18,7 +18,7 @@ export class ChatComponent implements OnInit {
   ws: any;
   message: string;
   currentUser: User;
-  channel: Channel;
+  channel: unknown;
 
   constructor(private appComponent: AppComponent,
               private messageService: MessageService) {
@@ -38,7 +38,7 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     let data = JSON.stringify({
-      'channel': this.channel.channelName,
+      'channel': (this.channel as Channel).channelName,
       'sender': this.currentUser.username,
       'timestamp': new Date(),
       'messageContent': this.message.trim()
@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
   }
 
   getMessageChannel(message: HttpResponse<string>): boolean {
-    return ((JSON.parse(message.body) as Message).channel) == this.channel.channelName;
+    return ((JSON.parse(message.body) as Message).channel) == (this.channel as Channel).channelName;
   }
 
   showMessage(message: HttpResponse<string>) {
@@ -63,12 +63,12 @@ export class ChatComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.appComponent.currentUser;
     this.connect();
-    this.channel = this.appComponent.currentChannel as Channel;
+    this.channel = this.appComponent.currentChannel;
     this.getMessages();
   }
 
   getMessages() {
-    this.messageService.getMessagesByChannel(this.channel.channelName).subscribe(messages => {
+    this.messageService.getMessagesByChannel((this.channel as Channel).channelName).subscribe(messages => {
       messages.forEach(message => {
         this.messages.push(message.sender + ": " + message.messageContent);
       });
