@@ -1,5 +1,9 @@
 export class Channel {
   id: number;
   channelName: string;
-  users: string[];
+  users = [];
+
+  constructor(){
+    this.users = [];
+  }
 }

@@ -5,7 +5,6 @@ import {AppComponent} from "../../app.component";
 import {User} from "../../models/user";
 import {Channel} from "../../models/channel";
 import {MessageService} from "../../services/message.service";
-import {Observable} from "rxjs";
 import {HttpResponse} from "@angular/common/http";
 
 @Component({
@@ -44,15 +43,15 @@ export class ChatComponent implements OnInit {
       'timestamp': new Date(),
       'messageContent': this.message.trim()
     });
-    this.ws.send("/app/messages", {}, data as Message);
+    this.ws.send("/app/messages", {}, data);
     this.message = '';
   }
 
-  getMessageChannel(message: HttpResponse): boolean {
+  getMessageChannel(message: HttpResponse<string>): boolean {
     return ((JSON.parse(message.body) as Message).channel) == this.channel.channelName;
   }
 
-  showMessage(message: HttpResponse) {
+  showMessage(message: HttpResponse<string>) {
     if (this.getMessageChannel(message)) {
 
       this.messages.push(JSON.parse(message.body).sender + ": " +
@@ -73,6 +72,7 @@ export class ChatComponent implements OnInit {
       messages.forEach(message => {
         this.messages.push(message.sender + ": " + message.messageContent);
       });
+      this.messages.reverse();
     });
   }
 }

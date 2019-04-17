@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
-import {Observable, Subject} from "rxjs";
+import {Observable, Subject, Subscription} from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,8 +14,13 @@ export class UserService {
 
   private usersUrl = '/server/users';
   currentUser: Subject<any> = new Subject<any>();
+  userSubscription: Subscription;
+  user: User;
 
   constructor(private http: HttpClient) {
+    this.userSubscription = this.currentUser.subscribe(user => {
+      this.user = user;
+    })
   }
 
   getUsers(): Observable<User[]> {
@@ -35,7 +40,11 @@ export class UserService {
     this.getUserByUsername(username).subscribe(data => {
       user = data;
     })
-    return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user, httpOptions);
+    return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user,  httpOptions);
+  }
+
+  leaveChannel(username: string, channel: string): Observable<any> {
+    return this.http.put<User>(`${this.usersUrl}/${username}/leave/?channel=${channel}`, JSON.stringify(this.user), httpOptions);
   }
 
   getUserByUsername(username: string): Observable<User> {

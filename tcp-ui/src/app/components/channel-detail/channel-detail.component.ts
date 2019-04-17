@@ -37,13 +37,16 @@ export class ChannelDetailComponent implements OnInit {
     this.currentUser = this.appComponent.currentUser;
     this.getUsers();
     this.getMessages();
+    this.messages.reverse();
   }
 
   getChannel(): void {
+    this.channel = new Channel();
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.channelService.getChannel(id)
       .subscribe(channel => this.channel = channel);
     this.channelId = id;
+    this.channel.users = [];
   }
 
   goBack(): void {
@@ -52,15 +55,25 @@ export class ChannelDetailComponent implements OnInit {
 
   addUser(user: User) {
     this.userService.joinChannel(user.username, this.channel.channelName).subscribe(user => {
-        this.channel.users.push(user);
+        this.channel.users.push(user.username);
       }
     );
     this.notificationService.add(user.username + " has joined the channel!");
   }
 
+  removeUser(user: User){
+    this.userService.leaveChannel(user.username, this.channel.channelName).subscribe( u => {
+      console.log(u.username);
+    });
+  }
+
   getUsers() {
     this.userService.getUsersSubscribedToChannel(this.channelId).subscribe(users => {
       this.users = users;
+      this.channel.users = [];
+      for(let user of users){
+        this.channel.users.push(user.username);
+      }
     });
   }
 
