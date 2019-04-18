@@ -47,7 +47,10 @@ export class RegisterComponent implements OnInit {
       this.userService.registerUser(this.registerForm.value).subscribe(user => {
         this.userService.changeCurrentUser(user.username);
       });
-      this.router.navigate(['/home']);
+      setTimeout(() => {
+        this.router.navigate(['/home']);
+      }, 200)
+
     }
     this.submitted = true;
   }
