@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Channel} from "../models/channel";
 import {Observable, of, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {catchError} from 'rxjs/internal/operators/catchError';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -12,6 +13,7 @@ const httpOptions = {
 })
 export class ChannelService {
 
+  responsestatus: number
   private channelsUrl = '/server/channels';
   currentChannel: Subject<Channel> = new Subject<Channel>();
 
@@ -35,6 +37,13 @@ export class ChannelService {
     return this.http.post<Channel>(`/server/channels`, channel, httpOptions);
   }
 
+  addDefaultChannel(): Observable<Channel> {
+    return this.http.post<Channel>(`/server/channels/default`, httpOptions)
+      .pipe(catchError(() => {
+      return of(null);
+    }));
+  }
+
   deleteChannel(id: number): Observable<Channel> {
     return this.http.delete<Channel>(`/server/channels/${id}`, httpOptions);
   }
@@ -48,5 +57,4 @@ export class ChannelService {
       this.currentChannel.next(channel);
     });
   }
-
 }
