@@ -15,19 +15,15 @@
 
 <ul>
   <h4>Channel Members</h4>
-  <li *ngFor="let user of users">
-    <body>{{user.username}}</body>
+  <li *ngFor="let user of channel.users">
+    <body>{{user}}</body>
   </li>
 </ul>
 
 
-
-<div *ngFor="let user of users">
-  <div *ngIf="user.username == currentUser.username">
+  <div *ngIf="subscribed">
     <app-chat></app-chat>
   </div>
-
-</div>
 
 
 </body>

@@ -9,6 +9,7 @@ import {NotificationService} from "../../services/notification.service";
 import {User} from "../../models/user";
 import {Message} from "../../models/message";
 import {MessageService} from "../../services/message.service";
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-channel-detail',
@@ -16,14 +17,11 @@ import {MessageService} from "../../services/message.service";
   styleUrls: ["../../app.component.css"]
 })
 
-//testing
-
 export class ChannelDetailComponent implements OnInit {
-  channel: Channel;
-  channelId: number;
+  channel: Channel = new Channel();
   currentUser: User;
-  users: User[] = [];
   messages: Message[] = [];
+  subscribed: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private location: Location,
@@ -37,18 +35,19 @@ export class ChannelDetailComponent implements OnInit {
   ngOnInit() {
     this.getChannel();
     this.currentUser = this.appComponent.currentUser;
-    this.getUsers();
     this.getMessages();
     this.messages.reverse();
   }
 
   getChannel(): void {
-    this.channel = new Channel();
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.channelService.getChannel(id)
-      .subscribe(channel => this.channel = channel);
-    this.channelId = id;
-    this.channel.users = [];
+      .subscribe(channel => {
+        this.channel = channel;
+        this.channel.users = [];
+        this.getUsers(channel);
+
+      });
   }
 
   goBack(): void {
@@ -57,29 +56,35 @@ export class ChannelDetailComponent implements OnInit {
 
   addUser(user: User) {
     this.userService.joinChannel(user.username, this.channel.channelName).subscribe(user => {
-        this.channel.users.push(user.username);
+        if (this.channel.users.indexOf(user.username) < 0) {
+          this.channel.users.push(user.username);
+        }
       }
     );
+    this.subscribed = true;
     this.notificationService.add(user.username + " joined " + this.channel.channelName + "!");
   }
 
-  removeUser(user: User){
-    this.userService.leaveChannel(user.username, this.channel.channelName).subscribe( u => {
-      this.notificationService.add(user.username + "has left " + this.channel.channelName + "!")
+  removeUser(user: User) {
+    this.userService.leaveChannel(user.username, this.channel.channelName).subscribe(() => {
+      this.notificationService.add(user.username + " has left " + this.channel.channelName + "!")
+      this.subscribed = false;
+      this.channel.users.splice(this.channel.users.indexOf(user.username), 1);
     });
   }
 
-  getUsers() {
-    this.userService.getUsersSubscribedToChannel(this.channelId).subscribe(users => {
-      this.users = users;
-      this.channel.users = [];
-      for(let user of users){
+  getUsers(channel: Channel) {
+    this.userService.getUsersSubscribedToChannel(channel.id).subscribe(users => {
+      users.map(user => {
         this.channel.users.push(user.username);
-      }
+        if (user.username == this.currentUser.username) {
+          this.subscribed = true;
+        }
+      });
     });
   }
 
-  getMessages(){
+  getMessages() {
     this.messageService.getMessagesByChannel(this.channel.channelName).subscribe(messages => {
       this.messages = messages;
     });

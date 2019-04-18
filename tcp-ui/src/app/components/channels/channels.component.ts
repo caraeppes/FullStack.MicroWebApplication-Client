@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
-import {forEach} from "@angular/router/src/utils/collection";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
