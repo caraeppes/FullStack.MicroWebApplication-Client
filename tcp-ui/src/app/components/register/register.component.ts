@@ -3,6 +3,7 @@ import {FormBuilder,  FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {NotificationService} from "../../services/notification.service";
 import {Router} from "@angular/router";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,9 @@ import {Router} from "@angular/router";
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
+  allUsers: User[] =[];
+  validUser: boolean;
+  submitted: boolean;
 
   constructor(private userService: UserService,
               private formBuilder: FormBuilder,
@@ -19,6 +23,9 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.validUser = false;
+    this.submitted = false;
+    this.getAllUsers();
     this.registerForm = this.formBuilder.group({
       firstName: '',
       lastName: '',
@@ -26,13 +33,23 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
-  onSubmit() {
-    this.userService.registerUser(this.registerForm.value).subscribe( user => {
-      this.userService.changeCurrentUser(user.username);
+  getAllUsers(){
+    this.userService.getUsers().subscribe(users => {
+      this.allUsers = users;
+      console.log(this.allUsers);
     });
-    this.router.navigate(['/home']);
 
+  }
+
+  onSubmit(username: string) {
+    if(this.allUsers.filter(user => user.username == username).length == 0) {
+      this.validUser = true;
+      this.userService.registerUser(this.registerForm.value).subscribe(user => {
+        this.userService.changeCurrentUser(user.username);
+      });
+      this.router.navigate(['/home']);
+    }
+    this.submitted = true;
   }
 
 

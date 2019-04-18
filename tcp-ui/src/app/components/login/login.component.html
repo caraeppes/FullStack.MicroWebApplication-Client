@@ -1,6 +1,6 @@
 <body>
 <h2>Log in</h2>
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.controls.username.value)">
 
   <div class="form-group">
     <label for="username">Username: </label>
@@ -11,6 +11,11 @@
     <button class="btn btn-primary">Login</button>
   </div>
 </form>
+<br>
+<div *ngIf="!validUser && submitted">
+  Invalid username!  Try again or click <a routerLink="/register">here</a> to register.
+</div>
+
 <br><br>
 <a routerLink="/home">Go back to homepage</a>
 </body>
