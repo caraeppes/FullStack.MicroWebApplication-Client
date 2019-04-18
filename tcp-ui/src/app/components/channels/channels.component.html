@@ -9,7 +9,7 @@
 
 <ul class="channels">
   <li *ngFor="let channel of channels">
-    <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel.channelName)">
+    <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">
       {{channel.channelName}}
     </a>
     <button (click)="delete(channel.id);">delete</button>

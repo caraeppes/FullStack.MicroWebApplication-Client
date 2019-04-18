@@ -10,7 +10,10 @@
   <table id="conversation" class="table table-striped">
     <h4>Messages</h4>
     <div *ngFor="let singleMessage of messages">
-      {{singleMessage}}
+      <a *ngIf="singleMessage.sender == currentUser.username">
+        <button (click)="deleteMessage(singleMessage.id);">x</button>
+      </a>
+      {{singleMessage.sender + ": " + singleMessage.messageContent}}
     </div>
   </table>
 </div>

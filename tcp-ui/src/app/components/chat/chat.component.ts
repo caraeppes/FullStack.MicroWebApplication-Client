@@ -6,6 +6,7 @@ import {User} from "../../models/user";
 import {Channel} from "../../models/channel";
 import {MessageService} from "../../services/message.service";
 import {HttpResponse} from "@angular/common/http";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'app-chat',
@@ -14,14 +15,16 @@ import {HttpResponse} from "@angular/common/http";
 })
 export class ChatComponent implements OnInit {
 
-  messages: string[] = [];
+  messageStrings: string[] = [];
+  messages: Message[] =[];
   ws: any;
   message: string;
   currentUser: User;
-  channel: unknown;
+  channel: Channel;
 
   constructor(private appComponent: AppComponent,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private notificationService: NotificationService) {
   }
 
   connect() {
@@ -38,7 +41,7 @@ export class ChatComponent implements OnInit {
 
   sendMessage() {
     let data = JSON.stringify({
-      'channel': (this.channel as Channel).channelName,
+      'channel': this.channel.channelName,
       'sender': this.currentUser.username,
       'timestamp': new Date(),
       'messageContent': this.message.trim()
@@ -47,16 +50,15 @@ export class ChatComponent implements OnInit {
     this.message = '';
   }
 
-  getMessageChannel(message: HttpResponse<string>): boolean {
-    return ((JSON.parse(message.body) as Message).channel) == (this.channel as Channel).channelName;
+  messageIsInChannel(messageResponse: HttpResponse<Message>): boolean {
+    let message = JSON.parse(messageResponse.body.toString());
+    console.log(this.channel.channelName);
+    return message.channel  == this.channel.channelName;
   }
 
-  showMessage(message: HttpResponse<string>) {
-    if (this.getMessageChannel(message)) {
-
-      this.messages.push(JSON.parse(message.body).sender + ": " +
-        (JSON.parse(message.body) as Message).messageContent
-      );
+  showMessage(message: HttpResponse<Message>) {
+    if (this.messageIsInChannel(message)) {
+      this.messages.push(JSON.parse(message.body.toString()));
     }
   }
 
@@ -68,11 +70,19 @@ export class ChatComponent implements OnInit {
   }
 
   getMessages() {
-    this.messageService.getMessagesByChannel((this.channel as Channel).channelName).subscribe(messages => {
+    this.messageService.getMessagesByChannel(this.channel.channelName).subscribe(messages => {
       messages.forEach(message => {
-        this.messages.push(message.sender + ": " + message.messageContent);
+        this.messages.push(message);
       });
       this.messages.reverse();
     });
+  }
+
+  deleteMessage(id: number) {
+    this.messages = this.messages.filter(m => m.id != id);
+    this.messageService.deleteMessage(id).subscribe(() => {
+        this.notificationService.add("Deleted message");
+      }
+    );
   }
 }

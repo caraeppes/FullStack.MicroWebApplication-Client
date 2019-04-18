@@ -9,7 +9,6 @@ import {NotificationService} from "../../services/notification.service";
 import {User} from "../../models/user";
 import {Message} from "../../models/message";
 import {MessageService} from "../../services/message.service";
-import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-channel-detail',
@@ -46,7 +45,6 @@ export class ChannelDetailComponent implements OnInit {
         this.channel = channel;
         this.channel.users = [];
         this.getUsers(channel);
-
       });
   }
 
@@ -89,5 +87,4 @@ export class ChannelDetailComponent implements OnInit {
       this.messages = messages;
     });
   }
-
 }

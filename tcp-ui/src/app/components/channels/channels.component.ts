@@ -37,7 +37,7 @@ export class ChannelsComponent implements OnInit {
       this.notificationService.add("Deleted channel");
   }
 
-  updateChannel(channel: string): void {
+  updateChannel(channel: Channel): void {
     this.channelService.updateCurrentChannel(channel);
   }
 }

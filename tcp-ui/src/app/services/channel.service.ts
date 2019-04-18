@@ -13,7 +13,7 @@ const httpOptions = {
 export class ChannelService {
 
   private channelsUrl = '/server/channels';
-  currentChannel: Subject<any> = new Subject<any>();
+  currentChannel: Subject<Channel> = new Subject<Channel>();
 
   constructor(private http: HttpClient) {
   }
@@ -43,8 +43,8 @@ export class ChannelService {
     return this.http.put(this.channelsUrl, channel, httpOptions);
   }
 
-  updateCurrentChannel(channel: string) {
-    this.getChannelByName(channel).subscribe(channel => {
+  updateCurrentChannel(channel: Channel) {
+    this.getChannelByName(channel.channelName).subscribe(channel => {
       this.currentChannel.next(channel);
     });
   }

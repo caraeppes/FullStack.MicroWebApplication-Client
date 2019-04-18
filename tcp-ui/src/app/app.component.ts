@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {UserService} from "./services/user.service";
 import {User} from "./models/user";
 import {ChannelService} from "./services/channel.service";
+import {Channel} from "./models/channel";
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
 
   currentUser: User;
   currentUserSubscription: Subscription;
-  currentChannel: string;
+  currentChannel: Channel;
   currentChannelSubscription: Subscription;
 
   constructor(private router: Router,
