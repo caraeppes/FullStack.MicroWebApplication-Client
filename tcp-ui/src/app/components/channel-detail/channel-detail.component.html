@@ -3,10 +3,10 @@
 
   <h2>{{channel.channelName}} Channel</h2>
 </div>
-<button (click)="addUser(currentUser);">
+<button *ngIf="!subscribed" (click)="addUser(currentUser);">
   Join Channel
 </button>
-<button (click)="removeUser(currentUser);">
+<button *ngIf="subscribed" (click)="removeUser(currentUser);">
   Leave Channel
 </button>
 <button (click)="goBack()">Go Back</button>
