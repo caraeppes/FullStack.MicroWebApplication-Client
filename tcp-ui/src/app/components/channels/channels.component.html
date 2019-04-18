@@ -12,6 +12,7 @@
     <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel.channelName)">
       {{channel.channelName}}
     </a>
+    <button (click)="delete(channel.id);">delete</button>
   </li>
 </ul>
 

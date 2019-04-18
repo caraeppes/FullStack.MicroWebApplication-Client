@@ -39,12 +39,16 @@ export class UserService {
     let user: User;
     this.getUserByUsername(username).subscribe(data => {
       user = data;
-    })
+    });
     return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user,  httpOptions);
   }
 
   leaveChannel(username: string, channel: string): Observable<any> {
-    return this.http.put<User>(`${this.usersUrl}/${username}/leave/?channel=${channel}`, JSON.stringify(this.user), httpOptions);
+    let user: User;
+    this.getUserByUsername(username).subscribe(data => {
+      user = data;
+    });
+    return this.http.put(`${this.usersUrl}/${username}/leave/?channel=${channel}`, user, httpOptions);
   }
 
   getUserByUsername(username: string): Observable<User> {
