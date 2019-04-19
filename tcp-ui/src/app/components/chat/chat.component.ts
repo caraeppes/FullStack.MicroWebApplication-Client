@@ -11,7 +11,8 @@ import {NotificationService} from "../../services/notification.service";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ["../../app.component.css"]
+  styleUrls: ['../../app.component.css',
+              './chat.component.css']
 })
 export class ChatComponent implements OnInit {
 

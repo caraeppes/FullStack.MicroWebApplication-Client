@@ -13,11 +13,11 @@
       <a *ngIf="singleMessage.sender == currentUser.username">
         <button (click)="deleteMessage(singleMessage.id);">x</button>
       </a>
-      {{singleMessage.sender + ": " + singleMessage.messageContent}}
+      {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
+      <span class="timestamp">{{singleMessage.timestamp | date: 'short'}}</span>
     </div>
   </table>
 </div>
 </div>
 <br><br><br>
 </body>
-
