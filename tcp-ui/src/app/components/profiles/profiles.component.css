@@ -1,0 +1,13 @@
+.leftSection {
+  float: left;
+  min-height: 200px;
+  /* padding: 0px 20px; */
+}
+
+.rightSection {
+  display: inline-block;
+  min-height: 200px;
+  /* padding: 0px 20px; */
+  margin-left: 40px;
+  /* background-color: yellow; */
+}
