@@ -1,0 +1,11 @@
+
+  <div class = "leftSection">
+    <h3>All registered users:</h3>
+    <ul>
+      <li *ngFor="let user of users">
+        <body>{{user.firstName}} {{user.lastName}}: {{user.username}}</body>
+      </li>
+    </ul>
+  </div>
+
+  <app-profile-detail class = "rightSection"><app-profile-detail>

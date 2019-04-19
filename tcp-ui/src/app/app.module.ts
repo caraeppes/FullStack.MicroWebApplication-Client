@@ -11,6 +11,8 @@ import { RegisterComponent } from './components/register/register.component';
 import {LoginComponent} from "./components/login/login.component";
 import {ChatComponent} from "./components/chat/chat.component";
 import { NotificationComponent } from './components/notification/notification.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { NotificationComponent } from './components/notification/notification.co
     RegisterComponent,
     LoginComponent,
     ChatComponent,
-    NotificationComponent
+    NotificationComponent,
+    ProfilesComponent,
+    ProfileDetailComponent
   ],
   imports: [
     BrowserModule,
