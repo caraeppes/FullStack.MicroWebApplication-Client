@@ -7,6 +7,7 @@ import {Channel} from "../../models/channel";
 import {MessageService} from "../../services/message.service";
 import {HttpResponse} from "@angular/common/http";
 import {NotificationService} from "../../services/notification.service";
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-chat',
@@ -25,7 +26,8 @@ export class ChatComponent implements OnInit {
 
   constructor(private appComponent: AppComponent,
               private messageService: MessageService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private session: SessionStorageService) {
   }
 
   connect() {
@@ -64,9 +66,9 @@ export class ChatComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUser = this.appComponent.currentUser;
+    this.currentUser = this.session.retrieve("currentUser");
     this.connect();
-    this.channel = this.appComponent.currentChannel;
+    this.channel = this.session.retrieve("currentChannel");
     this.getMessages();
   }
 
