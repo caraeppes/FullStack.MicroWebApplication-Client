@@ -75,11 +75,12 @@ export class ChannelDetailComponent implements OnInit {
     this.userService.getUsersSubscribedToChannel(channel.id).subscribe(users => {
       users.map(user => {
         this.channel.users.push(user.username);
-        if (user.username == this.currentUser.username) {
+        if (user.username === this.currentUser.username) {
           this.subscribed = true;
         }
       });
     });
+    console.log(this.channel.users);
   }
 
   getMessages() {

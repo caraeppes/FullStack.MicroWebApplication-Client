@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
+import {ChannelService} from '../../services/channel.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              private channelService: ChannelService) { }
 
   ngOnInit() {
     this.validUser = false;
@@ -32,7 +34,6 @@ export class LoginComponent implements OnInit {
   getAllUsers(){
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
-      console.log(this.allUsers);
     });
 
   }
@@ -42,6 +43,12 @@ export class LoginComponent implements OnInit {
       this.userService.changeCurrentUser(username);
       this.validUser = true;
       this.router.navigate(['/home']);
+      this.channelService.addDefaultChannel()
+        .subscribe(channel => console.log(channel));
+      setTimeout(() => {
+        this.userService.joinChannel(username, 'Main Channel')
+        .subscribe(subscribedUser => console.log(subscribedUser));
+        }, 200);
     }
     this.submitted = true;
   }

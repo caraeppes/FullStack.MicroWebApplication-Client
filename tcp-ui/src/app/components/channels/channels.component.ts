@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
-import {NotificationService} from "../../services/notification.service";
-import {forEach} from '@angular/router/src/utils/collection';
+import { NotificationService } from "../../services/notification.service";
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-channels',
@@ -12,18 +14,16 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class ChannelsComponent implements OnInit {
 
   channels: Channel[];
+  currentUser: User;
 
   constructor(private channelService: ChannelService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private userService: UserService,
+              private appComponent: AppComponent) { }
 
   ngOnInit() {
+    this.currentUser = this.appComponent.currentUser;
     this.getChannels();
-    this.channelService.addDefaultChannel()
-        .subscribe(channel => {
-          if (channel != null) {
-            this.channels.push(channel);
-          }
-        });
   }
 
   getChannels(): void {

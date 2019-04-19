@@ -6,7 +6,7 @@
 <button *ngIf="!subscribed" (click)="addUser(currentUser);">
   Join Channel
 </button>
-<button *ngIf="subscribed" (click)="removeUser(currentUser);">
+<button *ngIf="subscribed && channel.channelName!='Main Channel'" (click)="removeUser(currentUser);">
   Leave Channel
 </button>
 <button (click)="goBack()">Go Back</button>

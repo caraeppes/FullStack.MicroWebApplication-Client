@@ -38,10 +38,8 @@ export class ChannelService {
   }
 
   addDefaultChannel(): Observable<Channel> {
-    return this.http.post<Channel>(`/server/channels/default`, httpOptions)
-      .pipe(catchError(() => {
-      return of(null);
-    }));
+    console.log('ran');
+    return this.http.post<Channel>(`/server/channels/default`, httpOptions);
   }
 
   deleteChannel(id: number): Observable<Channel> {
