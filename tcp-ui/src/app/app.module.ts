@@ -13,6 +13,7 @@ import {ChatComponent} from "./components/chat/chat.component";
 import { NotificationComponent } from './components/notification/notification.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
+import {NgxWebstorageModule} from "ngx-webstorage";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ProfileDetailComponent } from './components/profile-detail/profile-deta
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxWebstorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

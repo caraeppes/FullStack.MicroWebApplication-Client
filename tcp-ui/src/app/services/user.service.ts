@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
 import {Observable, Subject, Subscription} from "rxjs";
+import {SessionStorageService} from "ngx-webstorage";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,17 +18,18 @@ export class UserService {
   userSubscription: Subscription;
   user: User;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private session: SessionStorageService) {
     this.userSubscription = this.currentUser.subscribe(user => {
       this.user = user;
-    })
+    });
   }
 
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  getUsersSubscribedToChannel(channelId: number): Observable<User[]>{
+  getUsersSubscribedToChannel(channelId: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.usersUrl}/findByChannel/${channelId}`);
   }
 
@@ -68,6 +70,8 @@ export class UserService {
   changeCurrentUser(username: string) {
     this.getUserByUsername(username).subscribe(user => {
       this.currentUser.next(user);
+      this.session.store("currentUser", user);
+      this.session.store("loggedIn", user != null);
     });
   }
 

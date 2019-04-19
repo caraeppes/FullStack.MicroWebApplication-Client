@@ -12,7 +12,7 @@
     <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">
       {{channel.channelName}}
     </a>
-    <button (click)="delete(channel.id);">delete</button>
+    <button *ngIf="channel.channelName!='Main Channel'" (click)="delete(channel.id);">delete</button>
   </li>
 </ul>
 
