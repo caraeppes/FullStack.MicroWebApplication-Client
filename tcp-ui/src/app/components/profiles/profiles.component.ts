@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {first} from "rxjs/operators";
 import {AppComponent} from "../../app.component";
+import {SessionStorageService} from "ngx-webstorage";
 import {ProfileDetailComponent} from "../profile-detail/profile-detail.component";
 
 @Component({
@@ -14,12 +15,13 @@ import {ProfileDetailComponent} from "../profile-detail/profile-detail.component
 
 export class ProfilesComponent implements OnInit {
   currentUser: User;
+  currentProfile: User;
   currentUserSubscription: Subscription;
   users: User[] = [];
 
-  constructor(
-    private userService: UserService,
-    private appComponent: AppComponent) {
+  constructor(private userService: UserService,
+              private appComponent: AppComponent,
+              private session: SessionStorageService) {
     this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
       this.currentUser = user;
     });
@@ -27,13 +29,12 @@ export class ProfilesComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.appComponent.currentUser;
+    this.currentProfile = this.appComponent.currentUser;
     this.loadAllUsers();
   }
 
-  deleteUser(id: number) {
-    this.userService.deleteUser(id).pipe(first()).subscribe(() => {
-      this.loadAllUsers()
-    });
+  onSelect(user: User): void {
+    this.currentProfile = user;
   }
 
   private loadAllUsers() {
