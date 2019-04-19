@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
-              private userService: UserService) { }
+              private userService: UserService,
+              public session: SessionStorageService) { }
 
   ngOnInit() {
     this.validUser = false;
@@ -40,6 +42,8 @@ export class LoginComponent implements OnInit {
   onSubmit(username: string) {
     if(this.allUsers.filter(user => user.username == username).length == 1) {
       this.userService.changeCurrentUser(username);
+      this.session.store("currentUser", this.allUsers.filter(user => user.username == username)[0]);
+      this.session.store("loggedIn", this.session.retrieve("currentUser") != null);
       this.validUser = true;
       this.router.navigate(['/home']);
     }

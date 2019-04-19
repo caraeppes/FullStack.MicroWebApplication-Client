@@ -3,6 +3,8 @@ import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 import {NotificationService} from "../../services/notification.service";
 import {forEach} from '@angular/router/src/utils/collection';
+import {SessionStorageService} from "ngx-webstorage";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-channels',
@@ -12,9 +14,11 @@ import {forEach} from '@angular/router/src/utils/collection';
 export class ChannelsComponent implements OnInit {
 
   channels: Channel[];
+  user: User;
 
   constructor(private channelService: ChannelService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private session: SessionStorageService) { }
 
   ngOnInit() {
     this.getChannels();
@@ -24,6 +28,7 @@ export class ChannelsComponent implements OnInit {
             this.channels.push(channel);
           }
         });
+    this.user = this.session.retrieve("currentUser");
   }
 
   getChannels(): void {
