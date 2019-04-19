@@ -4,6 +4,8 @@ import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {User} from "../../models/user";
 import {SessionStorageService} from "ngx-webstorage";
+import {ChannelService} from '../../services/channel.service';
+
 
 @Component({
   selector: 'app-login',
@@ -20,8 +22,9 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private router: Router,
               private userService: UserService,
-              public session: SessionStorageService) { }
-
+              public session: SessionStorageService,
+              private channelService: ChannelService) { }
+  
   ngOnInit() {
     this.validUser = false;
     this.submitted = false;
@@ -34,9 +37,7 @@ export class LoginComponent implements OnInit {
   getAllUsers(){
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
-      console.log(this.allUsers);
     });
-
   }
 
   onSubmit(username: string) {
@@ -46,6 +47,12 @@ export class LoginComponent implements OnInit {
       this.session.store("loggedIn", this.session.retrieve("currentUser") != null);
       this.validUser = true;
       this.router.navigate(['/home']);
+      this.channelService.addDefaultChannel()
+        .subscribe(channel => console.log(channel));
+      setTimeout(() => {
+        this.userService.joinChannel(username, 'Main Channel')
+        .subscribe(subscribedUser => console.log(subscribedUser));
+        }, 200);
     }
     this.submitted = true;
   }

@@ -4,7 +4,9 @@ import { ChannelService} from "../../services/channel.service";
 import {NotificationService} from "../../services/notification.service";
 import {forEach} from '@angular/router/src/utils/collection';
 import {SessionStorageService} from "ngx-webstorage";
-import {User} from "../../models/user";
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
+import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-channels',
@@ -20,15 +22,17 @@ export class ChannelsComponent implements OnInit {
               private notificationService: NotificationService,
               private session: SessionStorageService) { }
 
+
   ngOnInit() {
     this.getChannels();
+    this.user = this.session.retrieve("currentUser");
     this.channelService.addDefaultChannel()
         .subscribe(channel => {
           if (channel != null) {
             this.channels.push(channel);
           }
         });
-    this.user = this.session.retrieve("currentUser");
+    
   }
 
   getChannels(): void {

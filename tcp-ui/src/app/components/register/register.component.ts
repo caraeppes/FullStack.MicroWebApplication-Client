@@ -4,6 +4,7 @@ import {UserService} from "../../services/user.service";
 import {NotificationService} from "../../services/notification.service";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
+import {ChannelService} from '../../services/channel.service';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private userService: UserService,
               private formBuilder: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private channelService: ChannelService) {
   }
 
   ngOnInit() {
@@ -46,6 +48,12 @@ export class RegisterComponent implements OnInit {
       this.validUser = true;
       this.userService.registerUser(this.registerForm.value).subscribe(user => {
         this.userService.changeCurrentUser(user.username);
+        this.channelService.addDefaultChannel()
+          .subscribe(channel => console.log(channel));
+        setTimeout(() => {
+          this.userService.joinChannel(username, 'Main Channel')
+            .subscribe(subscribedUser => console.log(subscribedUser));
+        }, 200);
       });
       setTimeout(() => {
         this.router.navigate(['/home']);

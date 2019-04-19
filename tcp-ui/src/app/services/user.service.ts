@@ -29,7 +29,7 @@ export class UserService {
     return this.http.get<User[]>(this.usersUrl);
   }
 
-  getUsersSubscribedToChannel(channelId: number): Observable<User[]>{
+  getUsersSubscribedToChannel(channelId: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.usersUrl}/findByChannel/${channelId}`);
   }
 
