@@ -5,6 +5,7 @@ import {UserService} from "./services/user.service";
 import {User} from "./models/user";
 import {ChannelService} from "./services/channel.service";
 import {Channel} from "./models/channel";
+import {NotificationService} from './services/notification.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
 
   constructor(private router: Router,
               private userService: UserService,
+              private notificationService: NotificationService,
               private channelService: ChannelService) {
     this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
       this.currentUser = user;
@@ -35,6 +37,7 @@ export class AppComponent {
   logout(){
     this.userService.changeCurrentUser(null);
     this.currentUser = null;
+    this.notificationService.clear();
     this.router.navigate(['/login']);
   }
 }
