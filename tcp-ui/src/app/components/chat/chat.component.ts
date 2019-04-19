@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as Stomp from 'stompjs';
 import {Message} from "../../models/message";
 import {AppComponent} from "../../app.component";
@@ -17,17 +17,33 @@ import {SessionStorageService} from "ngx-webstorage";
 })
 export class ChatComponent implements OnInit {
 
-  messageStrings: string[] = [];
   messages: Message[] =[];
   ws: any;
   message: string;
   currentUser: User;
   channel: Channel;
+  @ViewChild('messageBox') private messageBox: ElementRef;
 
   constructor(private appComponent: AppComponent,
               private messageService: MessageService,
               private notificationService: NotificationService,
               private session: SessionStorageService) {
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.session.retrieve("currentUser");
+    this.connect();
+    this.channel = this.session.retrieve("currentChannel");
+    this.getMessages();
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+      this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight;
   }
 
   connect() {
@@ -37,6 +53,7 @@ export class ChatComponent implements OnInit {
     this.ws.connect({}, function () {
       that.ws.subscribe("/topic/reply", function (message) {
         that.showMessage(message
+
         );
       });
     });
@@ -63,13 +80,6 @@ export class ChatComponent implements OnInit {
     if (this.messageIsInChannel(message)) {
       this.messages.push(JSON.parse(message.body.toString()));
     }
-  }
-
-  ngOnInit(): void {
-    this.currentUser = this.session.retrieve("currentUser");
-    this.connect();
-    this.channel = this.session.retrieve("currentChannel");
-    this.getMessages();
   }
 
   getMessages() {
