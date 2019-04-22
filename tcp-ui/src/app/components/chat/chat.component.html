@@ -7,19 +7,29 @@
   <div class="row">
     <table id="conversation" class="table table-striped">
       <h4>Messages</h4>
-      <div #messageBox class="messages" >
-       <div *ngFor="let singleMessage of messages">
-         <p><span class="timestamp"><br>{{singleMessage.timestamp | date: 'short'}}</span><br>
-          <a *ngIf="singleMessage.sender == currentUser.username">
-            <button (click)="deleteMessage(singleMessage.id);">x</button>
-          </a>
+      <div #messageBox class="messages">
+        <div *ngFor="let singleMessage of messages">
+          <span class="timestamp"><br>{{singleMessage.timestamp | date: 'short'}}</span><br>
           {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
-       </div>
+          <a *ngIf="singleMessage.sender == currentUser.username">
+          <button (click)="editOnClick(singleMessage)">Edit</button>
+          <button (click)="deleteMessage(singleMessage.id);">Delete</button>
+          </a>
+        </div>
       </div>
-
     </table>
+  <br>
+  <div *ngIf="editingMessage">
+  <label>Edit your message:</label><br><br>
+  <textarea id="edit" name="edit" rows="3" cols="50" [(ngModel)]="editedMessage">
+    {{messageToEdit.messageContent}}
+  </textarea><br>
+    <button (click)="editMessage(messageToEdit, editedMessage)">Save</button>
 
   </div>
+
+
+</div>
 </div>
 <br><br><br>
 </body>
