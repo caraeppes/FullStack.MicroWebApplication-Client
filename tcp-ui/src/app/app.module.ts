@@ -11,6 +11,8 @@ import { RegisterComponent } from './components/register/register.component';
 import {LoginComponent} from "./components/login/login.component";
 import {ChatComponent} from "./components/chat/chat.component";
 import { NotificationComponent } from './components/notification/notification.component';
+import { ProfilesComponent } from './components/profiles/profiles.component';
+import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
 import {NgxWebstorageModule} from "ngx-webstorage";
 
 @NgModule({
@@ -22,7 +24,9 @@ import {NgxWebstorageModule} from "ngx-webstorage";
     RegisterComponent,
     LoginComponent,
     ChatComponent,
-    NotificationComponent
+    NotificationComponent,
+    ProfilesComponent,
+    ProfileDetailComponent
   ],
   imports: [
     BrowserModule,
