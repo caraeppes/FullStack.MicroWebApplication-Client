@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 import { NotificationService } from "../../services/notification.service";
-import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-channels',
@@ -14,15 +11,11 @@ import { AppComponent } from '../../app.component';
 export class ChannelsComponent implements OnInit {
 
   channels: Channel[];
-  currentUser: User;
 
   constructor(private channelService: ChannelService,
-              private notificationService: NotificationService,
-              private userService: UserService,
-              private appComponent: AppComponent) { }
+              private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.currentUser = this.appComponent.currentUser;
     this.getChannels();
   }
 
