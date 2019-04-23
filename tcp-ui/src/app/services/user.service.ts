@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
 import {Observable, Subject, Subscription} from "rxjs";
 import {SessionStorageService} from "ngx-webstorage";
+import {PrivateChannel} from "../models/private-channel";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -93,6 +94,10 @@ export class UserService {
       this.session.store("currentUser", user);
       this.session.store("loggedIn", user != null);
     });
+  }
+
+  joinPrivateChannel(user: User, privateChannel: PrivateChannel): Observable<User>{
+    return this.http.put(`${this.usersUrl}/${user.id}/joinPrivateChannel?privateChannelId=${privateChannel.id}`, privateChannel, httpOptions);
   }
 
 
