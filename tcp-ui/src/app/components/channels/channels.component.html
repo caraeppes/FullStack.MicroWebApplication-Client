@@ -1,12 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <h2>Channels</h2>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
+      <h2>Channels</h2>
+
       <label>
         Create a channel:<br>
         <div class="input-group mb-3">
@@ -16,11 +13,7 @@
           </div>
         </div>
       </label>
-    </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
       <div class="card border-success mb-3" style="max-width: 20rem;">
         <div class="card-header">Available Channels</div>
         <ul class="list-group list-group-flush">
@@ -30,21 +23,13 @@
           </li>
         </ul>
       </div>
+
     </div>
+
+    <div class="col">
+      <app-private-channels></app-private-channels>
+    </div>
+
   </div>
-
-
-
-
-      <!-- <ul class="channels">
-        <li *ngFor="let channel of channels">
-          <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">
-            {{channel.channelName}}
-          </a>
-          <span class="badge badge-light" *ngIf="channel.channelName!='Main Channel'" (click)="delete(channel.id);">delete</span>
-        </li>
-      </ul>
-    </div>
-  </div> -->
-
 </div>
+

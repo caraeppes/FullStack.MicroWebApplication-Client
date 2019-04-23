@@ -1,7 +1,3 @@
-<div *ngIf="loggedIn && !notificationService.notifications.length">
-  <p> No notifications to show right now.</p>
-</div>
-
 <div *ngIf="notificationService.notifications.length">
   <div *ngFor='let notification of notificationService.notifications'> {{notification}} </div>
   <br>

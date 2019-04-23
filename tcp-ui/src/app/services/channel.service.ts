@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {Channel} from "../models/channel";
 import {Observable, of, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {catchError} from 'rxjs/internal/operators/catchError';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -14,7 +13,7 @@ const httpOptions = {
 export class ChannelService {
 
   responsestatus: number
-  private channelsUrl = '/server/channels';
+  protected channelsUrl = '/server/channels';
   currentChannel: Subject<Channel> = new Subject<Channel>();
 
   constructor(private http: HttpClient) {
@@ -38,7 +37,6 @@ export class ChannelService {
   }
 
   addDefaultChannel(): Observable<Channel> {
-    console.log('ran');
     return this.http.post<Channel>(`/server/channels/default`, httpOptions);
   }
 

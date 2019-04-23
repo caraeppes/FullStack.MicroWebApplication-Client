@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               public session: SessionStorageService,
               private channelService: ChannelService) { }
-
+  
   ngOnInit() {
     this.validUser = false;
     this.submitted = false;
