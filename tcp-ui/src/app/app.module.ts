@@ -5,15 +5,16 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChannelsComponent } from './components/channels/channels.component';
 import { ChannelDetailComponent } from './components/channel-detail/channel-detail.component';
-import { HttpClientModule }    from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
-import {LoginComponent} from "./components/login/login.component";
-import {ChatComponent} from "./components/chat/chat.component";
+import {LoginComponent} from './components/login/login.component';
+import {ChatComponent} from './components/chat/chat.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { ProfilesComponent } from './components/profiles/profiles.component';
 import { ProfileDetailComponent } from './components/profile-detail/profile-detail.component';
-import {NgxWebstorageModule} from "ngx-webstorage";
+import {PrivateChannelsComponent} from './components/private-channels/private-channels.component';
+import {NgxWebstorageModule} from 'ngx-webstorage';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {NgxWebstorageModule} from "ngx-webstorage";
     ChatComponent,
     NotificationComponent,
     ProfilesComponent,
-    ProfileDetailComponent
+    ProfileDetailComponent,
+    PrivateChannelsComponent
   ],
   imports: [
     BrowserModule,

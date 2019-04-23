@@ -2,6 +2,7 @@
   <div class="row">
     <div class="column w-100" >
       <h4>Messages</h4>
+
       <div #messageBox class="messages-box overflow-auto border border-success">
         <div *ngFor="let singleMessage of messages">
           <span class="timestamp">{{singleMessage.timestamp | date: 'short'}}</span><br>
@@ -30,4 +31,7 @@
       <textarea name="message" rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)]="message"></textarea>
     </div>
   </div>
+
+
 </div>
+

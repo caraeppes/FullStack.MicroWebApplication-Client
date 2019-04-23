@@ -33,6 +33,10 @@ export class UserService {
     return this.http.get<User[]>(`${this.usersUrl}/findByChannel/${channelId}`);
   }
 
+  getUsersSubscribedToPrivateChannel(channelId: number): Observable<User[]> {
+    return this.http.get<User[]>(`${this.usersUrl}/findByPrivateChannel/${channelId}`);
+  }
+
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/${id}`);
   }

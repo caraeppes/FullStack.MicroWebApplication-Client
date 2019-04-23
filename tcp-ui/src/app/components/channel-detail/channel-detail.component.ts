@@ -37,7 +37,10 @@ export class ChannelDetailComponent implements OnInit {
     this.getChannel();
     this.currentUser = this.session.retrieve("currentUser");
     this.getMessages();
-    this.messages.reverse();
+    this.messages.reverse()
+    if (this.channel.channelName === 'Main Channel') {
+      this.subscribed = true;
+    }
   }
 
   getChannel(): void {

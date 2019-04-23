@@ -1,0 +1,21 @@
+<h2>Private Messages</h2>
+
+<label>
+  Create a private message:<br>
+  <div class="input-group mb-3">
+    <input #channelName type="text" class="form-control" placeholder="Channel name" aria-label="Create a channel:" aria-describedby="button-addon2" >
+    <div class="input-group-append">
+      <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="add(channelName.value);">add</button>
+    </div>
+  </div>
+</label>
+
+<div class="card border-success mb-3" style="max-width: 20rem;">
+  <div class="card-header">Available Private Messages</div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor="let privateChannel of privateChannels">
+      <a routerLink="/detail/{{privateChannel.id}}" (click)="updateChannel(privateChannel)">{{privateChannel.users}}</a>
+      <span class="badge badge-light" (click)="delete(privateChannel.id);">delete</span>
+    </li>
+  </ul>
+</div>
