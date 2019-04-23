@@ -14,7 +14,7 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class ProfileDetailComponent implements OnInit {
 
-  currentUser: User;
+  currentProfile: User;
 
   constructor(private userService: UserService,
               private appComponent: AppComponent,
@@ -25,5 +25,4 @@ export class ProfileDetailComponent implements OnInit {
     this.currentProfile = this.session.retrieve("currentUser");
   }
 
-  // @Input() currentProfile: User;
 }

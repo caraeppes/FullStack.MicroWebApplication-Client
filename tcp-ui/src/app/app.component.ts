@@ -21,7 +21,6 @@ export class AppComponent {
   currentChannel: Channel;
   currentChannelSubscription: Subscription;
   loggedIn: boolean;
-  users: User[] = [];
 
   constructor(private router: Router,
               private userService: UserService,
