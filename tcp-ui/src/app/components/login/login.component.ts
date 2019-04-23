@@ -42,6 +42,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit(username: string) {
     if(this.allUsers.filter(user => user.username == username).length == 1) {
+      this.userService.loginUser(username).subscribe(user => {
+        console.log(user.username);
+      });
       this.userService.changeCurrentUser(username);
       this.session.store("currentUser", this.allUsers.filter(user => user.username == username)[0]);
       this.session.store("loggedIn", this.session.retrieve("currentUser") != null);
@@ -53,6 +56,7 @@ export class LoginComponent implements OnInit {
         this.userService.joinChannel(username, 'Main Channel')
         .subscribe(subscribedUser => console.log(subscribedUser));
         }, 200);
+
     }
     this.submitted = true;
   }
