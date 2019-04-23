@@ -1,6 +1,11 @@
 .timestamp {
   font-size: .75em;
   color: grey;
+  margin-top: 10px;
+}
+
+.btn {
+  margin: 0 5pt;
 }
 
 .messages{
@@ -12,4 +17,14 @@
   outline: 5px solid slateblue;
   outline-offset: 5px;
   word-wrap: break-word;
+}
+
+.messages-box {
+  margin: 5px 0;
+  padding: 10px;
+  height: 175px;
+}
+
+label {
+  margin-top: 10px;
 }

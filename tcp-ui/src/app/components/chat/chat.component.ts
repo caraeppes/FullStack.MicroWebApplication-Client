@@ -12,8 +12,7 @@ import {SessionStorageService} from "ngx-webstorage";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['../../app.component.css',
-              './chat.component.css']
+  styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
 
@@ -94,13 +93,13 @@ export class ChatComponent implements OnInit {
   }
 
   editMessage(message: Message, newMessage: string){
-    this.messageService.editMessage(message, newMessage + "  (Edited)").subscribe(() => {
-      this.messages = [];
-      this.getMessages();
-      this.messageToEdit = null;
-      this.editingMessage = false;
-    });
-  }
+      this.messageService.editMessage(message, newMessage + "  (Edited)").subscribe(() => {
+        this.messages = [];
+        this.getMessages();
+        this.messageToEdit = null;
+        this.editingMessage = false;
+      });
+    }
 
   deleteMessage(id: number) {
     this.messages = this.messages.filter(m => m.id != id);

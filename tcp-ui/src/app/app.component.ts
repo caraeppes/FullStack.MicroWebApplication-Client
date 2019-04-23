@@ -21,6 +21,7 @@ export class AppComponent {
   currentChannel: Channel;
   currentChannelSubscription: Subscription;
   loggedIn: boolean;
+  users: User[] = [];
 
   constructor(private router: Router,
               private userService: UserService,
@@ -38,7 +39,17 @@ export class AppComponent {
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
 
-  title = 'Tcp Chat App';
+  // ngOnInit() {
+  //   this.loadAllUsers();
+  // }
+  //
+  // private loadAllUsers() {
+  //   this.userService.getUsers().subscribe(users => {
+  //     this.users = users;
+  //   });
+  // }
+
+  title = 'Dragon Chat';
 
   logout() {
     this.userService.changeCurrentUser(null);
@@ -47,5 +58,3 @@ export class AppComponent {
     this.router.navigate(['/login']);
   }
 }
-
-

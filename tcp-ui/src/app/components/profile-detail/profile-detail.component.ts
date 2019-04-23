@@ -25,5 +25,5 @@ export class ProfileDetailComponent implements OnInit {
     this.currentProfile = this.session.retrieve("currentUser");
   }
 
-  @Input() currentProfile: User;
+  // @Input() currentProfile: User;
 }

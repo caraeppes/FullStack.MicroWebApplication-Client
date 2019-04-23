@@ -11,7 +11,7 @@ import { AppComponent } from '../../app.component';
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
-  styleUrls: ["../../app.component.css"]
+  styleUrls: ['./channels.component.css']
 })
 export class ChannelsComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class ChannelsComponent implements OnInit {
             this.channels.push(channel);
           }
         });
-    
+
   }
 
   getChannels(): void {

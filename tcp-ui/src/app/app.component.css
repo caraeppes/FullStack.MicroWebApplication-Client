@@ -1,4 +1,8 @@
-body{
+hr {
+  border: 1px solid;
+}
+
+/* body{
   font-family: Tahoma, Geneva, sans-serif;
   font-size: 13px;
   letter-spacing: 2px;
@@ -113,12 +117,12 @@ a:link {
   color: slateblue;
 }
 
-/* visited link */
+/* visited link
 a:visited {
   color:  slateblue;
 }
 
-/* mouse over link */
+/* mouse over link
 a:hover {
   color:  powderblue;
 }
@@ -170,4 +174,4 @@ a:hover {
 .layout-column  .flex-66 {
   max-width: 100%;
   max-height: calc(200% / 3);
-}
+} */

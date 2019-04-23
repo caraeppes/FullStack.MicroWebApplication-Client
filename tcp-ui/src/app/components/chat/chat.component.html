@@ -1,35 +1,37 @@
-<body>
-<div id="main-content" class="container">
-  <p>
-    <label>Type your message and hit Enter key to send!</label><br><br>
-    <textarea name="message" rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)]="message"></textarea>
-
+<div class="container">
   <div class="row">
-    <table id="conversation" class="table table-striped">
+    <div class="column w-100" >
       <h4>Messages</h4>
-      <div #messageBox class="messages">
+
+      <div #messageBox class="messages-box overflow-auto border border-success">
         <div *ngFor="let singleMessage of messages">
-          <span class="timestamp"><br>{{singleMessage.timestamp | date: 'short'}}</span><br>
-          {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
-          <a *ngIf="singleMessage.sender == currentUser.username">
-          <button (click)="editOnClick(singleMessage)">Edit</button>
-          <button (click)="deleteMessage(singleMessage.id);">Delete</button>
-          </a>
+          <span class="timestamp">{{singleMessage.timestamp | date: 'short'}}</span><br>
+          {{singleMessage.sender + ": " + singleMessage.messageContent}}
+           <a *ngIf="singleMessage.sender == currentUser.username">
+             <button class="btn btn-info btn-sm" (click)="editOnClick(singleMessage)">Edit</button>
+             <button class="btn btn-info btn-sm" (click)="deleteMessage(singleMessage.id);">Delete</button>
+           </a>
         </div>
       </div>
-    </table>
-  <br>
-  <div *ngIf="editingMessage">
-  <label>Edit your message:</label><br><br>
-  <textarea id="edit" name="edit" rows="3" cols="50" [(ngModel)]="editedMessage">
-    {{messageToEdit.messageContent}}
-  </textarea><br>
-    <button (click)="editMessage(messageToEdit, editedMessage)">Save</button>
 
+      <div *ngIf="editingMessage">
+        <label>Edit your message:</label><br><br>
+        <textarea id="edit" name="edit" rows="3" cols="50" [(ngModel)]="editedMessage">
+          {{messageToEdit.messageContent}}
+        </textarea><br>
+          <button (click)="editMessage(messageToEdit, editedMessage)">Save</button>
+
+    </div>
+  </div>
+  </div>
+
+  <div class="row">
+    <div class="column">
+      <label>Type your message and hit Enter key to send!</label>
+      <textarea name="message" rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)]="message"></textarea>
+    </div>
   </div>
 
 
 </div>
 </div>
-<br><br><br>
-</body>

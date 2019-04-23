@@ -1,3 +1,12 @@
+.btn {
+  margin: 5pt 0;
+}
+
+.row {
+  margin: 10pt 0 ;
+}
+
+/*
 label {
   display: inline-block;
   width: 3em;
@@ -26,4 +35,4 @@ button:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;
-}
+} */
