@@ -1,20 +1,50 @@
-<body>
-<h2>Channels</h2>
-<div>
-  <label>Create a channel:<br>
-  <input #channelName/>
-  </label>
-  <button (click)="add(channelName.value); channelName.value=''">add</button>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Channels</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <label>
+        Create a channel:<br>
+        <div class="input-group mb-3">
+          <input #channelName type="text" class="form-control" placeholder="Channel name" aria-label="Create a channel:" aria-describedby="button-addon2" >
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="add(channelName.value);">add</button>
+          </div>
+        </div>
+      </label>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="card border-success mb-3" style="max-width: 20rem;">
+        <div class="card-header">Available Channels</div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let channel of channels">
+            <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">{{channel.channelName}}</a>
+            <span class="badge badge-light" *ngIf="channel.channelName!='Main Channel'" (click)="delete(channel.id);">delete</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+      <!-- <ul class="channels">
+        <li *ngFor="let channel of channels">
+          <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">
+            {{channel.channelName}}
+          </a>
+          <span class="badge badge-light" *ngIf="channel.channelName!='Main Channel'" (click)="delete(channel.id);">delete</span>
+        </li>
+      </ul>
+    </div>
+  </div> -->
+
 </div>
-
-<ul class="channels">
-  <li *ngFor="let channel of channels">
-    <a routerLink="/detail/{{channel.id}}" (click)="updateChannel(channel)">
-      {{channel.channelName}}
-    </a>
-    <button *ngIf="channel.channelName!='Main Channel'" (click)="delete(channel.id);">delete</button>
-  </li>
-</ul>
-
-</body>
-

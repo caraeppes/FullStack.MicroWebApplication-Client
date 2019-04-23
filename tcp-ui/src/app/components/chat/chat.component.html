@@ -1,25 +1,23 @@
-<body>
-<div id="main-content" class="container">
-  <p>
-    <label>Type your message and hit Enter key to send!</label><br><br>
-    <textarea name="message" rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)]="message"></textarea>
+<div class="container">
+  <div class="row">
+    <div class="column w-100" >
+      <h4>Messages</h4>
+      <div class="messages-box overflow-auto border border-success">
+        <div *ngFor="let singleMessage of messages">
+          <span class="timestamp">{{singleMessage.timestamp | date: 'short'}}</span><br>
+           <a *ngIf="singleMessage.sender == currentUser.username">
+             <button class="btn btn-info btn-sm" (click)="deleteMessage(singleMessage.id);">x</button>
+           </a>
+           {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="row">
-    <table id="conversation" class="table table-striped">
-      <h4>Messages</h4>
-      <div #messageBox class="messages" >
-       <div *ngFor="let singleMessage of messages">
-         <p><span class="timestamp"><br>{{singleMessage.timestamp | date: 'short'}}</span><br>
-          <a *ngIf="singleMessage.sender == currentUser.username">
-            <button (click)="deleteMessage(singleMessage.id);">x</button>
-          </a>
-          {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
-       </div>
-      </div>
-
-    </table>
-
+    <div class="column">
+      <label>Type your message and hit Enter key to send!</label>
+      <textarea name="message" rows="3" cols="50" (keyup.enter)="sendMessage($event)" [(ngModel)]="message"></textarea>
+    </div>
   </div>
 </div>
-<br><br><br>
-</body>

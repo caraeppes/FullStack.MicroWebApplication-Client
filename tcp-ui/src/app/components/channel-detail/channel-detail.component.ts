@@ -14,7 +14,7 @@ import {SessionStorageService} from "ngx-webstorage";
 @Component({
   selector: 'app-channel-detail',
   templateUrl: './channel-detail.component.html',
-  styleUrls: ["../../app.component.css"]
+  styleUrls: ['./channel-detail.component.css']
 })
 
 export class ChannelDetailComponent implements OnInit {

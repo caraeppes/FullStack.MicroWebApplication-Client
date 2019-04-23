@@ -1,13 +1,31 @@
-<body>
-<h2>Welcome</h2> <h2 *ngIf="loggedIn">{{currentUser.username}}</h2>
-<div *ngIf="!loggedIn">
-    Click <a routerLink="/register">here</a> to create an account.<br><br>
-    Click <a routerLink="/login">here</a> to login.
+<div class="container">
+
+  <div class="row">
+    <div class="col">
+      <h2>Welcome
+        <span *ngIf="loggedIn">, {{currentUser.username}}!</span>
+        <span *ngIf="!loggedIn">! Please login or register.</span></h2>
+        <a class="btn btn-success" *ngIf="!loggedIn" routerLink="/login">Login</a>
+        <a class="btn btn-success" *ngIf="!loggedIn" routerLink="/register">Create an account</a>
+        <div *ngIf="loggedIn">
+          <p>Dragon Chat is a great place to catch up with your cohort! Whether it be chatting about the latest episode of Game Of Thrones, or collaborating with the latest group project, it is easy to create a channel to fit your needs!</p>
+          <p>To get started, please click on the channel you want to join, or start a new one.</p>
+        </div>
+    </div>
+
+    <div class="col" *ngIf="loggedIn">
+      <app-channels></app-channels>
+    </div>
+
+    <!-- <div class="card border-success mb-3" style="max-width: 20rem;" *ngIf="loggedIn">
+        <div class="card-header">
+          All registered users:
+        </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let user of users">
+              {{user.firstName}} {{user.lastName}} | username: {{user.username}}
+            </li>
+          </ul>
+    </div> -->
+  </div>
 </div>
-<h3>All registered users:</h3>
-<ul>
-  <li *ngFor="let user of users">
-    <body>{{user.firstName}} {{user.lastName}}: {{user.username}}</body>
-  </li>
-</ul>
-</body>
