@@ -61,9 +61,25 @@ export class UserService {
     return this.http.get<User>(`${this.usersUrl}/findusername/${username}`);
   }
 
-
   registerUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user, httpOptions);
+  }
+
+  loginUser(username: string): Observable<any> {
+    let user: User;
+    this.getUserByUsername(username).subscribe(data => {
+      user = data;
+    });
+    return this.http.put(`${this.usersUrl}/login/${username}`, user, httpOptions);
+
+  }
+
+  logoutUser(username: string): Observable<any> {
+    let user: User;
+    this.getUserByUsername(username).subscribe(data => {
+      user = data;
+    });
+    return this.http.put(`${this.usersUrl}/logout/${username}`, user, httpOptions);
   }
 
   deleteUser(user: User | number): Observable<User> {

@@ -37,20 +37,11 @@ export class AppComponent {
     });
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
-
-  // ngOnInit() {
-  //   this.loadAllUsers();
-  // }
-  //
-  // private loadAllUsers() {
-  //   this.userService.getUsers().subscribe(users => {
-  //     this.users = users;
-  //   });
-  // }
-
+  
   title = 'Chat Dragon';
 
   logout() {
+    // this.userService.logoutUser(this.currentUser.username).subscribe();
     this.userService.changeCurrentUser(null);
     this.session.store("currentUser", null);
     this.notificationService.clear();

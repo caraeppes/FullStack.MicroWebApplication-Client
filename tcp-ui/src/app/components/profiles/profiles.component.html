@@ -14,7 +14,8 @@
         <li class="list-group-item" *ngFor="let user of users"
           [class.selected] ="user === currentProfile"
           (click)="onSelect(user)">
-            {{user.firstName}} {{user.lastName}}: {{user.username}}
+            <span *ngIf="user.connected" class="badge badge-success">online</span> &nbsp;
+            {{user.firstName}} {{user.lastName}} | username: {{user.username}}
         </li>
       </ul>
     </div>
@@ -24,7 +25,7 @@
         <p><strong>First Name: </strong>{{currentProfile.firstName}}</p>
         <p><strong>Last Name: </strong>{{currentProfile.lastName}}</p>
         <p><strong>User Name: </strong>{{currentProfile.username}}</p>
-        <p><strong>Connected: </strong>{{currentProfile.connected}}</p>
+        <span *ngIf="currentProfile.connected" class="badge badge-success">online</span>
     </div>
 
   </div>

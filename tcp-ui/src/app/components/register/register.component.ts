@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit {
           this.userService.joinChannel(username, 'Main Channel')
             .subscribe(subscribedUser => console.log(subscribedUser));
         }, 200);
+        this.userService.loginUser(username).subscribe();
       });
       setTimeout(() => {
         this.router.navigate(['/home']);
