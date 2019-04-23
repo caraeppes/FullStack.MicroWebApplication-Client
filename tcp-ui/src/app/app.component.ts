@@ -37,22 +37,8 @@ export class AppComponent {
     });
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
-
-<<<<<<< HEAD
-  title = 'ChatDragon';
-=======
-  // ngOnInit() {
-  //   this.loadAllUsers();
-  // }
-  //
-  // private loadAllUsers() {
-  //   this.userService.getUsers().subscribe(users => {
-  //     this.users = users;
-  //   });
-  // }
-
+  
   title = 'Chat Dragon';
->>>>>>> b11927d7cca404aa3a20f2102247516c0055b70d
 
   logout() {
     // this.userService.logoutUser(this.currentUser.username).subscribe();
