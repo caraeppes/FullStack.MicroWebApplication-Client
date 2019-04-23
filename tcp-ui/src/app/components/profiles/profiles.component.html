@@ -1,26 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h3>Select a user:</h3>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" *ngFor="let user of users"
+          [class.selected] ="user === currentProfile"
+          (click)="onSelect(user)">
+            {{user.firstName}} {{user.lastName}}: {{user.username}}
+        </li>
+      </ul>
+    </div>
 
-  <div class = "leftSection">
-    <h3>All registered users:</h3>
-    <ul>
-      <li *ngFor="let user of users"
-        [class.selected] ="user === currentProfile"
-        (click)="onSelect(user)">
-          {{user.firstName}} {{user.lastName}}: {{user.username}}
-      </li>
-    </ul>
+    <div class="col-md-6" *ngIf="currentProfile">
+      <h3>Profile Detail</h3>
+        <p><strong>First Name: </strong>{{currentProfile.firstName}}</p>
+        <p><strong>Last Name: </strong>{{currentProfile.lastName}}</p>
+        <p><strong>User Name: </strong>{{currentProfile.username}}</p>
+        <p><strong>Connected: </strong>{{currentProfile.connected}}</p>
+    </div>
+
   </div>
 
-  <div *ngIf="currentProfile" class = "rightSection">
-    <h3>Profile Detail</h3>
-    <!-- <div *ngIf="currentProfile"> -->
-      <p>
-        <strong>First Name: </strong>{{currentProfile.firstName}}
-      </p>
-      <p>
-        <strong>Last Name: </strong>{{currentProfile.lastName}}
-      </p>
-      <p>
-        <strong>User Name: </strong>{{currentProfile.username}}
-      </p>
-  </div>
-  <!-- <app-profile-detail class = "rightSection"><app-profile-detail> -->
+</div>
