@@ -1,4 +1,4 @@
-<div *ngIf="!notificationService.notifications.length">
+<div *ngIf="loggedIn && !notificationService.notifications.length">
   <p> No notifications to show right now.</p>
 </div>
 

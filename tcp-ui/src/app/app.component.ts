@@ -39,15 +39,15 @@ export class AppComponent {
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
 
-  ngOnInit() {
-    this.loadAllUsers();
-  }
-
-  private loadAllUsers() {
-    this.userService.getUsers().subscribe(users => {
-      this.users = users;
-    });
-  }
+  // ngOnInit() {
+  //   this.loadAllUsers();
+  // }
+  //
+  // private loadAllUsers() {
+  //   this.userService.getUsers().subscribe(users => {
+  //     this.users = users;
+  //   });
+  // }
 
   title = 'Dragon Chat';
 
