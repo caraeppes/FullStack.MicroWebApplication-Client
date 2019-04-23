@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from "../../models/user";
 import {Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
-import {first} from "rxjs/operators";
 import {AppComponent} from "../../app.component";
 import {SessionStorageService} from "ngx-webstorage";
-import {ProfileDetailComponent} from "../profile-detail/profile-detail.component";
+import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-profiles',
@@ -18,6 +17,7 @@ export class ProfilesComponent implements OnInit {
   currentProfile: User;
   currentUserSubscription: Subscription;
   users: User[] = [];
+  query: String;
 
   constructor(private userService: UserService,
               private appComponent: AppComponent,
@@ -33,6 +33,10 @@ export class ProfilesComponent implements OnInit {
     this.loadAllUsers();
   }
 
+  ngOnChanges(){
+    this.loadAllUsers();
+  }
+
   onSelect(user: User): void {
     this.currentProfile = user;
   }
@@ -40,6 +44,25 @@ export class ProfilesComponent implements OnInit {
   private loadAllUsers() {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
+      this.search();
     });
   }
+
+  search() {
+    if (this.query) {
+      this.query = this.query.toLowerCase();
+      this.users = [];
+      this.userService.getUsers().subscribe(users => {
+        users.filter(user =>
+          (user.username.toLowerCase() == this.query || user.firstName.toLowerCase() == this.query ||
+            user.lastName.toLowerCase() == this.query || user.firstName.toLowerCase() + " " + user.lastName.toLowerCase() == this.query)
+        ).map(user => {
+          this.users.push(user);
+        });
+      });
+    }
   }
+
+
+
+}
