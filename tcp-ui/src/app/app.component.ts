@@ -48,7 +48,7 @@ export class AppComponent {
   //   });
   // }
 
-  title = 'Dragon Chat';
+  title = 'Chat Dragon';
 
   logout() {
     this.userService.changeCurrentUser(null);
