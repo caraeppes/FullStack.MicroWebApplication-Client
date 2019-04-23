@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PrivateChannel} from '../../models/private-channel';
 import {PrivateChannelService} from '../../services/private-channel.service';
 import {NotificationService} from '../../services/notification.service';
@@ -15,15 +15,25 @@ export class PrivateChannelsComponent implements OnInit {
 
   privateChannels: PrivateChannel[] = [];
   currentUser: User;
+  currentChannel: PrivateChannel;
+  query: String;
+  users: User[] = [];
+  displayChat: boolean = false;
 
   constructor(private privateChannelService: PrivateChannelService,
               private notificationService: NotificationService,
               private userService: UserService,
-              private sessionStorageService: SessionStorageService) { }
+              private sessionStorageService: SessionStorageService) {
+  }
 
   ngOnInit() {
     this.getChannels();
     this.currentUser = this.sessionStorageService.retrieve('currentUser');
+    this.sessionStorageService.store("privateChannel", null);
+  }
+
+  ngOnChanges(){
+    this.getChannels();
   }
 
   getChannels(): void {
@@ -49,11 +59,17 @@ export class PrivateChannelsComponent implements OnInit {
       });
   }
 
-  add(channelName: string): void {
-    this.privateChannelService.addChannel({channelName} as PrivateChannel)
-      .subscribe(privateChannel => {
-        this.privateChannels.push(privateChannel);
+  add(user: User): void {
+    let newChannel: PrivateChannel = new PrivateChannel();
+    console.log(newChannel.id);
+    this.privateChannelService.addChannel(newChannel).subscribe(privateChannel => {
+        this.userService.joinPrivateChannel(user, privateChannel).subscribe(() => {
+          this.userService.joinPrivateChannel(this.currentUser, privateChannel).subscribe(() => {
+            this.setUsersString(privateChannel);
+          });
+        });
       });
+    this.displayChat = true;
   }
 
   delete(id: number): void {
@@ -64,5 +80,20 @@ export class PrivateChannelsComponent implements OnInit {
 
   updateChannel(privateChannel: PrivateChannel): void {
     this.privateChannelService.updateCurrentChannel(privateChannel);
+  }
+
+  search() {
+    if (this.query) {
+      this.query = this.query.toLowerCase();
+      this.users = [];
+      this.userService.getUsers().subscribe(users => {
+        users.filter(user =>
+          (user.username.toLowerCase() == this.query || user.firstName.toLowerCase() == this.query ||
+            user.lastName.toLowerCase() == this.query || user.firstName.toLowerCase() + " " + user.lastName.toLowerCase() == this.query)
+        ).map(user => {
+          this.users.push(user);
+        });
+      });
+    }
   }
 }

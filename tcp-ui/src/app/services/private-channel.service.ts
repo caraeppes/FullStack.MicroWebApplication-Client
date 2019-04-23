@@ -3,6 +3,7 @@ import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PrivateChannel} from '../models/private-channel';
 import {SessionStorageService} from 'ngx-webstorage';
+import {User} from "../models/user";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -28,7 +29,7 @@ export class PrivateChannelService {
   }
 
   addChannel(privateChannel: PrivateChannel): Observable<PrivateChannel> {
-    return this.http.post<PrivateChannel>(`/server/privatechannels`, privateChannel, httpOptions);
+    return this.http.post<PrivateChannel>(`${this.channelsUrl}`, httpOptions);
   }
 
   deleteChannel(id: number): Observable<PrivateChannel> {
@@ -40,4 +41,6 @@ export class PrivateChannelService {
       this.currentChannel.next(privateChannel);
     });
   }
+
+
 }

@@ -2,13 +2,28 @@
 
 <label>
   Create a private message:<br>
-  <div class="input-group mb-3">
-    <input #channelName type="text" class="form-control" placeholder="Channel name" aria-label="Create a channel:" aria-describedby="button-addon2" >
-    <div class="input-group-append">
-      <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="add(channelName.value);">add</button>
+  <form class="form-inline my-2 my-lg-0">
+    <div class="input-group mb-3">
+      <input class="form-control" name="query" autocomplete="off" [(ngModel)]="query" type="text"
+             placeholder="Search for users...">
+      <div class="input-group-append">
+        <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
+        <button class="btn btn-outline-success" type="reset" (click)="users = []">Reset</button>
+      </div>
     </div>
-  </div>
+  </form>
 </label>
+
+<ul class="list-group list-group-flush">
+  <li class="list-group-item" *ngFor="let user of users" (click)="add(user)">
+    {{user.firstName}} {{user.lastName}}: {{user.username}}<br>
+    <br>
+  </li>
+</ul>
+
+<div *ngIf="displayChat">
+<app-chat></app-chat>
+</div>
 
 <div class="card border-success mb-3" style="max-width: 20rem;">
   <div class="card-header">Available Private Messages</div>

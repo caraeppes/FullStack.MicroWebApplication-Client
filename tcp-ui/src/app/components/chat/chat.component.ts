@@ -8,6 +8,7 @@ import {MessageService} from "../../services/message.service";
 import {HttpResponse} from "@angular/common/http";
 import {NotificationService} from "../../services/notification.service";
 import {SessionStorageService} from "ngx-webstorage";
+import {PrivateChannel} from "../../models/private-channel";
 
 @Component({
   selector: 'app-chat',
@@ -22,6 +23,7 @@ export class ChatComponent implements OnInit {
   editedMessage: string;
   currentUser: User;
   channel: Channel;
+  privateChannel: PrivateChannel;
   editingMessage: boolean;
   messageToEdit: Message;
   @ViewChild('messageBox') private messageBox: ElementRef;

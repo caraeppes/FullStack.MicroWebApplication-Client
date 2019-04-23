@@ -1,12 +1,18 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-
+      <label>
+        Search for a user profile:<br>
       <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" name="query" [(ngModel)]="query" type="text" placeholder="Search">
-        <button class="btn btn-secondary my-2 my-sm-0" type="button" (click)="search()">Search</button>
-        <button class="btn btn-secondary my-2 my-sm-0" type="reset" (click)="loadAllUsers()">Reset</button>
+        <div class="input-group mb-3">
+          <input class="form-control" name="query" autocomplete="off" [(ngModel)]="query" type="text" placeholder="Search for users...">
+          <div class="input-group-append">
+            <button class="btn btn-outline-success" type="button" (click)="search()">Search</button>
+            <button class="btn btn-outline-success" type="reset" (click)="loadAllUsers()">Reset</button>
+          </div>
+        </div>
       </form>
+      </label>
       <br>
 
       <h3>Select a user:</h3>
