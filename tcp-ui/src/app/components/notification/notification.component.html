@@ -1,9 +1,6 @@
 <div *ngIf="notificationService.notifications.length">
-
-  <h3>Notifications</h3>
   <div *ngFor='let notification of notificationService.notifications'> {{notification}} </div>
   <br>
   <button class="clear" (click)="notificationService.clear()">Clear</button>
   <br><br>
 </div>
-

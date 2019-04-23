@@ -3,8 +3,6 @@ import {Observable, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {PrivateChannel} from '../models/private-channel';
 import {SessionStorageService} from 'ngx-webstorage';
-import {User} from '../models/user';
-import {Channel} from '../models/channel';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,7 +14,7 @@ const httpOptions = {
 export class PrivateChannelService {
 
   protected channelsUrl = '/server/privatechannels';
-  currentChannel: Subject<Channel> = new Subject<Channel>();
+  currentChannel: Subject<PrivateChannel> = new Subject<PrivateChannel>();
 
   constructor(private http: HttpClient, private session: SessionStorageService) {
   }
@@ -39,7 +37,7 @@ export class PrivateChannelService {
 
   updateCurrentChannel(privateChannel: PrivateChannel) {
     this.getChannelByName(privateChannel.channelName).subscribe(channel => {
-      this.currentChannel.next(channel);
+      this.currentChannel.next(privateChannel);
     });
   }
 }

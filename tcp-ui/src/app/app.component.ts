@@ -38,7 +38,17 @@ export class AppComponent {
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
 
-  title = 'Tcp Chat App';
+  // ngOnInit() {
+  //   this.loadAllUsers();
+  // }
+  //
+  // private loadAllUsers() {
+  //   this.userService.getUsers().subscribe(users => {
+  //     this.users = users;
+  //   });
+  // }
+
+  title = 'Chat Dragon';
 
   logout() {
     this.userService.changeCurrentUser(null);
@@ -47,5 +57,3 @@ export class AppComponent {
     this.router.navigate(['/login']);
   }
 }
-
-

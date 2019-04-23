@@ -9,7 +9,7 @@ import {SessionStorageService} from 'ngx-webstorage';
 @Component({
   selector: 'app-private-channels',
   templateUrl: './private-channels.component.html',
-  styleUrls: ['../../app.component.css']
+  styleUrls: ['./private-channels.component.css']
 })
 export class PrivateChannelsComponent implements OnInit {
 

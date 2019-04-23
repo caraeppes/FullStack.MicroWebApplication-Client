@@ -11,7 +11,7 @@ import { AppComponent } from '../../app.component';
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',
-  styleUrls: ["../../app.component.css"]
+  styleUrls: ['./channels.component.css']
 })
 export class ChannelsComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class ChannelsComponent implements OnInit {
             this.channels.push(channel);
           }
         });
-    
+
   }
 
   getChannels(): void {
@@ -50,7 +50,7 @@ export class ChannelsComponent implements OnInit {
   delete(id: number): void {
     this.channels = this.channels.filter(c => c.id !== id);
     this.channelService.deleteChannel(id).subscribe();
-    this.notificationService.add('Deleted privateChannel');
+    this.notificationService.add('Deleted channel');
   }
 
   updateChannel(channel: Channel): void {

@@ -10,7 +10,7 @@ import {ChannelService} from '../../services/channel.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ["../../app.component.css"]
+  styleUrls: ["./login.component.css"]
 })
 export class LoginComponent implements OnInit {
 

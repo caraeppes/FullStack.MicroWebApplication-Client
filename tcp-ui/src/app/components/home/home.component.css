@@ -1,4 +1,10 @@
-label {
+.btn {
+  margin: 0 5pt;
+}
+
+
+
+/* label {
   display: inline-block;
   width: 3em;
   margin: .5em 0;
@@ -26,4 +32,4 @@ button:disabled {
   background-color: #eee;
   color: #ccc;
   cursor: auto;
-}
+} */
