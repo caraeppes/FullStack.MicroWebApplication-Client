@@ -2,16 +2,26 @@
   <div class="row">
     <div class="column w-100" >
       <h4>Messages</h4>
-      <div class="messages-box overflow-auto border border-success">
+      <div #messageBox class="messages-box overflow-auto border border-success">
         <div *ngFor="let singleMessage of messages">
           <span class="timestamp">{{singleMessage.timestamp | date: 'short'}}</span><br>
+          {{singleMessage.sender + ": " + singleMessage.messageContent}}
            <a *ngIf="singleMessage.sender == currentUser.username">
-             <button class="btn btn-info btn-sm" (click)="deleteMessage(singleMessage.id);">x</button>
+             <button class="btn btn-info btn-sm" (click)="editOnClick(singleMessage)">Edit</button>
+             <button class="btn btn-info btn-sm" (click)="deleteMessage(singleMessage.id);">Delete</button>
            </a>
-           {{singleMessage.sender + ": " + singleMessage.messageContent}}<br>
         </div>
       </div>
+
+      <div *ngIf="editingMessage">
+        <label>Edit your message:</label><br><br>
+        <textarea id="edit" name="edit" rows="3" cols="50" [(ngModel)]="editedMessage">
+          {{messageToEdit.messageContent}}
+        </textarea><br>
+          <button (click)="editMessage(messageToEdit, editedMessage)">Save</button>
+
     </div>
+  </div>
   </div>
 
   <div class="row">

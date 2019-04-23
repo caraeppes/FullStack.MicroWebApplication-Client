@@ -19,8 +19,11 @@ export class ChatComponent implements OnInit {
   messages: Message[] =[];
   ws: any;
   message: string;
+  editedMessage: string;
   currentUser: User;
   channel: Channel;
+  editingMessage: boolean;
+  messageToEdit: Message;
   @ViewChild('messageBox') private messageBox: ElementRef;
 
   constructor(private appComponent: AppComponent,
@@ -86,9 +89,17 @@ export class ChatComponent implements OnInit {
       messages.forEach(message => {
         this.messages.push(message);
       });
-      this.messages.reverse();
     });
   }
+
+  editMessage(message: Message, newMessage: string){
+      this.messageService.editMessage(message, newMessage + "  (Edited)").subscribe(() => {
+        this.messages = [];
+        this.getMessages();
+        this.messageToEdit = null;
+        this.editingMessage = false;
+      });
+    }
 
   deleteMessage(id: number) {
     this.messages = this.messages.filter(m => m.id != id);
@@ -96,5 +107,11 @@ export class ChatComponent implements OnInit {
         this.notificationService.add("Deleted message");
       }
     );
+  }
+
+  editOnClick(message: Message){
+    this.messageToEdit = message
+    this.editedMessage = message.messageContent;
+    this.editingMessage = true;
   }
 }

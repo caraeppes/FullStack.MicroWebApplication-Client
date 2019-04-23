@@ -16,9 +16,13 @@ export class MessageService {
 
   constructor(private http: HttpClient) { }
 
-  getMesages(): Observable<Message[]> {
+  getMessages(): Observable<Message[]> {
     return this.http.get<Message[]>(this.messagesUrl);
   }
+
+  getMessageById(id: number): Observable<Message>{
+      return this.http.get<Message>(`${this.messagesUrl}/${id}`);
+    }
 
   getMessagesByChannel(channel: string): Observable<Message[]>{
     return this.http.get<Message[]>(`${this.messagesUrl}/findAll/${channel}`);
@@ -27,5 +31,10 @@ export class MessageService {
   deleteMessage(id: number): Observable<Message> {
     return this.http.delete<Message>(`/server/messages/${id}`, httpOptions);
   }
+
+  editMessage(message: Message, content: string): Observable<Message>{
+      let id = message.id;
+      return this.http.put<Message>(`${this.messagesUrl}/update/${id}?content=${content}`, message, httpOptions);
+    }
 
 }

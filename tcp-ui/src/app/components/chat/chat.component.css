@@ -4,6 +4,10 @@
   margin-top: 10px;
 }
 
+.btn {
+  margin: 0 5pt;
+}
+
 .messages{
   width:400px;
   overflow-y:scroll;
