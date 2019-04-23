@@ -15,7 +15,6 @@ import {ActivatedRoute} from '@angular/router';
 export class ProfileDetailComponent implements OnInit {
 
   currentUser: User;
-  currentProfile: User;
 
   constructor(private userService: UserService,
               private appComponent: AppComponent,
