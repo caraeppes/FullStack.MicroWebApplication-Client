@@ -1,16 +1,16 @@
 <body>
 <h1>{{title}}</h1>
-<div *ngIf="currentUser">
+<div *ngIf="loggedIn">
   <nav>
     <a routerLink="/home">Home</a>
     <a routerLink="/channels">Channels</a>
-
+    <a routerLink="/profiles">Profiles</a>
   </nav>
 </div>
 <router-outlet></router-outlet>
 <app-notifications></app-notifications>
 
-<div *ngIf="currentUser">
+<div *ngIf="loggedIn">
   <button (click)="logout()">
     Logout
   </button>

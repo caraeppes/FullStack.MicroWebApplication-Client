@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import * as Stomp from 'stompjs';
 import {Message} from "../../models/message";
 import {AppComponent} from "../../app.component";
@@ -7,6 +7,7 @@ import {Channel} from "../../models/channel";
 import {MessageService} from "../../services/message.service";
 import {HttpResponse} from "@angular/common/http";
 import {NotificationService} from "../../services/notification.service";
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-chat',
@@ -16,16 +17,36 @@ import {NotificationService} from "../../services/notification.service";
 })
 export class ChatComponent implements OnInit {
 
-  messageStrings: string[] = [];
   messages: Message[] =[];
   ws: any;
   message: string;
+  editedMessage: string;
   currentUser: User;
   channel: Channel;
+  editingMessage: boolean;
+  messageToEdit: Message;
+  @ViewChild('messageBox') private messageBox: ElementRef;
 
   constructor(private appComponent: AppComponent,
               private messageService: MessageService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private session: SessionStorageService) {
+  }
+
+  ngOnInit(): void {
+    this.currentUser = this.session.retrieve("currentUser");
+    this.connect();
+    this.channel = this.session.retrieve("currentChannel");
+    this.getMessages();
+    this.scrollToBottom();
+  }
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  scrollToBottom(): void {
+      this.messageBox.nativeElement.scrollTop = this.messageBox.nativeElement.scrollHeight;
   }
 
   connect() {
@@ -35,6 +56,7 @@ export class ChatComponent implements OnInit {
     this.ws.connect({}, function () {
       that.ws.subscribe("/topic/reply", function (message) {
         that.showMessage(message
+
         );
       });
     });
@@ -63,19 +85,20 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    this.currentUser = this.appComponent.currentUser;
-    this.connect();
-    this.channel = this.appComponent.currentChannel;
-    this.getMessages();
-  }
-
   getMessages() {
     this.messageService.getMessagesByChannel(this.channel.channelName).subscribe(messages => {
       messages.forEach(message => {
         this.messages.push(message);
       });
-      this.messages.reverse();
+    });
+  }
+
+  editMessage(message: Message, newMessage: string){
+    this.messageService.editMessage(message, newMessage + "  (Edited)").subscribe(() => {
+      this.messages = [];
+      this.getMessages();
+      this.messageToEdit = null;
+      this.editingMessage = false;
     });
   }
 
@@ -85,5 +108,11 @@ export class ChatComponent implements OnInit {
         this.notificationService.add("Deleted message");
       }
     );
+  }
+
+  editOnClick(message: Message){
+    this.messageToEdit = message
+    this.editedMessage = message.messageContent;
+    this.editingMessage = true;
   }
 }

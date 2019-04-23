@@ -1,9 +1,9 @@
 export class PrivateChannel {
   id: number;
   channelName: string;
-  users = [];
+  users: string;
 
-  constructor(){
-    this.users = [];
+  constructor() {
+    this.users = 'khjhl';
   }
 }

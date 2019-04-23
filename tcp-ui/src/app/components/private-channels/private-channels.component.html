@@ -1,8 +1,11 @@
 <body>
 <h2>Private Messages</h2>
 <ul class="private-channels">
-  <li *ngFor="let channel of privateChannels">
-    <body>{{channel.channelName}}</body>
+  <li *ngFor="let privateChannel of privateChannels">
+    <a routerLink="/detail/{{privateChannel.id}}" (click)="updateChannel(privateChannel)">
+      {{privateChannel.users}}
+    </a>
+    <button (click)="delete(privateChannel.id);">delete</button>
   </li>
 </ul>
 

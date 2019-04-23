@@ -9,6 +9,7 @@ import {NotificationService} from "../../services/notification.service";
 import {User} from "../../models/user";
 import {Message} from "../../models/message";
 import {MessageService} from "../../services/message.service";
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-channel-detail',
@@ -28,21 +29,25 @@ export class ChannelDetailComponent implements OnInit {
               private userService: UserService,
               private appComponent: AppComponent,
               private notificationService: NotificationService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private session: SessionStorageService) {
   }
 
   ngOnInit() {
     this.getChannel();
-    this.currentUser = this.appComponent.currentUser;
+    this.currentUser = this.session.retrieve("currentUser");
     this.getMessages();
-    this.messages.reverse();
+    this.messages.reverse()
+    if (this.channel.channelName === 'Main Channel') {
+      this.subscribed = true;
+    }
   }
 
   getChannel(): void {
     const id = +this.activatedRoute.snapshot.paramMap.get('id');
     this.channelService.getChannel(id)
       .subscribe(channel => {
-        this.channel = channel;
+        this.channel = this.session.retrieve("currentChannel");
         this.channel.users = [];
         this.getUsers(channel);
       });
