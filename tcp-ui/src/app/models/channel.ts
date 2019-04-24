@@ -5,5 +5,6 @@ export class Channel {
 
   userString = '';
 
-  constructor(){
+  constructor() {
   }
+}

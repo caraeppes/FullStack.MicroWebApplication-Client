@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {User} from "../models/user";
-import {Observable, Subject, Subscription} from "rxjs";
-import {SessionStorageService} from "ngx-webstorage";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {User} from '../models/user';
+import {Observable, Subject, Subscription} from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -29,14 +28,14 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/${id}`);
-
+  }
 
   joinChannel(username: string, channel: string): Observable<any> {
     let user: User;
     this.getUserByUsername(username).subscribe(data => {
       user = data;
     });
-    return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user,  httpOptions);
+    return this.http.put(`${this.usersUrl}/${username}/join/?channel=${channel}`, user, httpOptions);
   }
 
   leaveChannel(username: string, channel: string): Observable<any> {
@@ -71,19 +70,5 @@ export class UserService {
     });
     return this.http.put(`${this.usersUrl}/logout/${username}`, user, httpOptions);
   }
-
-  deleteUser(user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.id;
-    return this.http.delete<User>(`${this.usersUrl}/${id}`, httpOptions);
-  }
-
-  changeCurrentUser(username: string) {
-    this.getUserByUsername(username).subscribe(user => {
-      this.currentUser.next(user);
-      this.session.store("currentUser", user);
-      this.session.store("loggedIn", user != null);
-    });
-  }
-
 
 }

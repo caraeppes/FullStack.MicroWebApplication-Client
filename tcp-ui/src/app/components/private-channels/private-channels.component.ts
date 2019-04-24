@@ -79,7 +79,8 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   updateChannel(channel: Channel): void {
-    this.channelService.updateCurrentChannel(channel);
+    this.sessionStorageService.store("currentChannel", channel);
+    // this.currentChannel = channel;
   }
 
   search() {
