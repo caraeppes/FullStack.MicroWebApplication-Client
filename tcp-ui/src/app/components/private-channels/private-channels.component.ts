@@ -5,6 +5,8 @@ import {User} from '../../models/user';
 import {SessionStorageService} from 'ngx-webstorage';
 import {Channel} from '../../models/channel';
 import {ChannelService} from '../../services/channel.service';
+import {filter} from "rxjs/operators";
+import {allowNewBindingsForStylingContext} from "@angular/core/src/render3/styling/class_and_style_bindings";
 
 @Component({
   selector: 'app-private-channels',
@@ -37,13 +39,13 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   getChannels(): void {
-    this.channelService.getPrivateChannels()
-      .subscribe(privateChannelsOfUser => {
-        privateChannelsOfUser.forEach(privateChannel => {
-          this.setUsersString(privateChannel);
-          this.channels.push(privateChannel);
-        });
+    this.channelService.getChannels().subscribe(channels => {
+      channels.filter(channel =>
+       channel.isPrivate
+      ).map(channel=> {
+        this.channels.push(channel);
       });
+    });
   }
 
   setUsersString(channel: Channel): void {
@@ -60,16 +62,20 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   add(user: User): void {
-    let newChannel: Channel = new Channel();
-    newChannel.private = true;
-    newChannel.channelName = 'Private Message';
-    this.channelService.addChannel(newChannel).subscribe(channel => {
+    let channelName:string  = "Private Channel: " + user.firstName + " & " + this.currentUser.firstName;
+    this.channelService.addChannel(JSON.parse("{\"channelName\" : \"" + channelName +"\"," +
+      "\"isPrivate\" : \"true\"}")).subscribe(c => {
+      this.channelService.makePrivate(c).subscribe(channel => {
         this.userService.joinChannel(user.username, channel.channelName).subscribe(() => {
           this.userService.joinChannel(this.currentUser.username, channel.channelName).subscribe(() => {
+            console.log(channel);
+            this.sessionStorageService.store("currentChannel", channel);
             this.setUsersString(channel);
+            this.channels.push(channel);
           });
         });
       });
+    });
     this.displayChat = true;
   }
 
@@ -80,7 +86,8 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   updateChannel(channel: Channel): void {
-    this.channelService.updateCurrentChannel(channel);
+    this.sessionStorageService.store("currentChannel", channel);
+    this.currentChannel = channel;
   }
 
   search() {

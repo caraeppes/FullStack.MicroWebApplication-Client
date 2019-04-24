@@ -1,9 +1,11 @@
+import {User} from "./user";
+
 export class Channel {
   id: number;
   channelName: string;
-  users = [];
+  users: User[] = [];
 
   userString = '';
-  private = false;
+  isPrivate: boolean;
 }
 

@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {User} from "../models/user";
-import {Observable, Subject, Subscription} from "rxjs";
-import {SessionStorageService} from "ngx-webstorage";
+import {Observable} from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -76,14 +75,4 @@ export class UserService {
     const id = typeof user === 'number' ? user : user.id;
     return this.http.delete<User>(`${this.usersUrl}/${id}`, httpOptions);
   }
-
-  changeCurrentUser(username: string) {
-    this.getUserByUsername(username).subscribe(user => {
-      this.currentUser.next(user);
-      this.session.store("currentUser", user);
-      this.session.store("loggedIn", user != null);
-    });
-  }
-
-
 }
