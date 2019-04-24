@@ -14,15 +14,9 @@ const httpOptions = {
 export class UserService {
 
   private usersUrl = '/server/users';
-  currentUser: Subject<any> = new Subject<any>();
-  userSubscription: Subscription;
   user: User;
 
-  constructor(private http: HttpClient,
-              private session: SessionStorageService) {
-    this.userSubscription = this.currentUser.subscribe(user => {
-      this.user = user;
-    });
+  constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<User[]> {
@@ -35,7 +29,7 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/${id}`);
-  }
+
 
   joinChannel(username: string, channel: string): Observable<any> {
     let user: User;
@@ -90,5 +84,6 @@ export class UserService {
       this.session.store("loggedIn", user != null);
     });
   }
+
 
 }

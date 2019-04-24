@@ -7,9 +7,12 @@
       <label>
         Create a channel:<br>
         <div class="input-group mb-3">
-          <input #channelName type="text" class="form-control" placeholder="Channel name" aria-label="Create a channel:" aria-describedby="button-addon2" >
+          <input #channelName type="text" class="form-control" placeholder="Channel name" aria-label="Create a channel:"
+                 aria-describedby="button-addon2">
           <div class="input-group-append">
-            <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="add(channelName.value);">add</button>
+            <button class="btn btn-outline-success" type="button" id="button-addon2" (click)="add(channelName.value);">
+              add
+            </button>
           </div>
         </div>
       </label>
@@ -26,8 +29,10 @@
 
     </div>
 
+    <div *ngIf="router.url == '/channels'">
     <div class="col">
       <app-private-channels></app-private-channels>
+    </div>
     </div>
 
   </div>

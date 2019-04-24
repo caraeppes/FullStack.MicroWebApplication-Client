@@ -1,12 +1,8 @@
 <div class="container">
   <div class="row">
-    <div class="col" *ngIf="channel">
-      <h2>{{channel.channelName}}</h2>
-    </div>
-  </div>
-
-  <div class="row">
     <div class="col">
+      <h2>{{channel.channelName}}</h2>
+
       <button type="button" class="btn btn-info btn-sm btn-block" (click)="goBack()">Return to Channel List</button>
       <button type="button" class="btn btn-info btn-sm btn-block" *ngIf="!subscribed" (click)="addUser(currentUser);">
           Join Channel</button>
@@ -29,3 +25,4 @@
 
   </div>
 </div>
+

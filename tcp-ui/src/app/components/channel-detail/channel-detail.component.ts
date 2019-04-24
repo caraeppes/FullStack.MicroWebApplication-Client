@@ -18,7 +18,7 @@ import {SessionStorageService} from "ngx-webstorage";
 })
 
 export class ChannelDetailComponent implements OnInit {
-  channel: Channel = new Channel();
+  channel: Channel;
   currentUser: User;
   messages: Message[] = [];
   subscribed = false;
@@ -44,13 +44,9 @@ export class ChannelDetailComponent implements OnInit {
   }
 
   getChannel(): void {
-    const id = +this.activatedRoute.snapshot.paramMap.get('id');
-    this.channelService.getChannel(id)
-      .subscribe(channel => {
         this.channel = this.session.retrieve("currentChannel");
         this.channel.users = [];
-        this.getUsers(channel);
-      });
+        this.getUsers(this.channel);
   }
 
   goBack(): void {
@@ -85,7 +81,6 @@ export class ChannelDetailComponent implements OnInit {
         }
       });
     });
-    console.log(this.channel.users);
   }
 
   getMessages() {
