@@ -20,7 +20,7 @@ export class ProfileDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currentProfile = this.session.retrieve("currentProfile");
+    this.currentProfile = this.session.retrieve("currentUser");
   }
 
   ngDoCheck(){

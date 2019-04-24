@@ -15,15 +15,9 @@ const httpOptions = {
 export class UserService {
 
   private usersUrl = '/server/users';
-  currentUser: Subject<any> = new Subject<any>();
-  userSubscription: Subscription;
   user: User;
 
-  constructor(private http: HttpClient,
-              private session: SessionStorageService) {
-    this.userSubscription = this.currentUser.subscribe(user => {
-      this.user = user;
-    });
+  constructor(private http: HttpClient) {
   }
 
   getUsers(): Observable<User[]> {
@@ -36,10 +30,6 @@ export class UserService {
 
   getUsersSubscribedToPrivateChannel(channelId: number): Observable<User[]> {
     return this.http.get<User[]>(`${this.usersUrl}/findByPrivateChannel/${channelId}`);
-  }
-
-  getUser(id: number): Observable<User> {
-    return this.http.get<User>(`${this.usersUrl}/${id}`);
   }
 
   joinChannel(username: string, channel: string): Observable<any> {
@@ -83,22 +73,7 @@ export class UserService {
     return this.http.put(`${this.usersUrl}/logout/${username}`, user, httpOptions);
   }
 
-  deleteUser(user: User | number): Observable<User> {
-    const id = typeof user === 'number' ? user : user.id;
-    return this.http.delete<User>(`${this.usersUrl}/${id}`, httpOptions);
-  }
-
-  changeCurrentUser(username: string) {
-    this.getUserByUsername(username).subscribe(user => {
-      this.currentUser.next(user);
-      this.session.store("currentUser", user);
-      this.session.store("loggedIn", user != null);
-    });
-  }
-
   joinPrivateChannel(user: User, privateChannel: PrivateChannel): Observable<User>{
     return this.http.put(`${this.usersUrl}/${user.id}/joinPrivateChannel?privateChannelId=${privateChannel.id}`, privateChannel, httpOptions);
   }
-
-
 }
