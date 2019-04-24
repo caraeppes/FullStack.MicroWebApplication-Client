@@ -1,7 +1,7 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
       <h2 class="text-break">Welcome
         <span *ngIf="loggedIn">, {{currentUser.username}}!</span>
         <span *ngIf="!loggedIn">! Please login or register.</span></h2>
@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="col-md-6" *ngIf="loggedIn">
+    <div class="col-md-8" *ngIf="loggedIn">
       <app-channels></app-channels>
     </div>
 
