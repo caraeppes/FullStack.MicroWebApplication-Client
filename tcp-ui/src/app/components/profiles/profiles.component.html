@@ -18,7 +18,6 @@
       <h3>Select a user:</h3>
       <ul class="list-group list-group-flush">
         <li class="list-group-item" *ngFor="let user of users"
-          [class.selected] ="user === currentProfile"
           (click)="onSelect(user)">
             <span *ngIf="user.connected" class="badge badge-success">online</span> &nbsp;
             {{user.firstName}} {{user.lastName}} | username: {{user.username}}
@@ -26,12 +25,8 @@
       </ul>
     </div>
 
-    <div class="col-md-6" *ngIf="currentProfile">
-      <h3>Profile Detail</h3>
-        <p><strong>First Name: </strong>{{currentProfile.firstName}}</p>
-        <p><strong>Last Name: </strong>{{currentProfile.lastName}}</p>
-        <p><strong>User Name: </strong>{{currentProfile.username}}</p>
-        <span *ngIf="currentProfile.connected" class="badge badge-success">online</span>
+    <div class="col-md-6">
+       <app-profile-detail></app-profile-detail>
     </div>
 
   </div>

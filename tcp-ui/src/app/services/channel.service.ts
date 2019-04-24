@@ -13,7 +13,6 @@ const httpOptions = {
 })
 export class ChannelService {
 
-  responsestatus: number
   protected channelsUrl = '/server/channels';
   currentChannel: Subject<Channel> = new Subject<Channel>();
 
@@ -34,10 +33,6 @@ export class ChannelService {
     return this.http.get<Channel>(url);
   }
 
-  getChannelByName(name: string): Observable<Channel> {
-    return this.http.get<Channel>(`${this.channelsUrl}/getByName/${name}`);
-  }
-
   addChannel(channel: Channel): Observable<Channel> {
     return this.http.post<Channel>(`/server/channels`, channel, httpOptions);
   }
@@ -48,15 +43,5 @@ export class ChannelService {
 
   deleteChannel(id: number): Observable<Channel> {
     return this.http.delete<Channel>(`/server/channels/${id}`, httpOptions);
-  }
-
-  updateChannel(channel: Channel): Observable<any> {
-    return this.http.put(this.channelsUrl, channel, httpOptions);
-  }
-
-  updateCurrentChannel(channel: Channel) {
-    this.getChannelByName(channel.channelName).subscribe(channel => {
-      this.currentChannel.next(channel);
-    });
   }
 }
