@@ -4,7 +4,6 @@ import {Subscription} from "rxjs";
 import {UserService} from "../../services/user.service";
 import {AppComponent} from "../../app.component";
 import {SessionStorageService} from "ngx-webstorage";
-import {filter, map} from "rxjs/operators";
 
 @Component({
   selector: 'app-profiles',
@@ -14,22 +13,17 @@ import {filter, map} from "rxjs/operators";
 
 export class ProfilesComponent implements OnInit {
   currentUser: User;
-  currentProfile: User;
-  currentUserSubscription: Subscription;
   users: User[] = [];
   query: String;
 
   constructor(private userService: UserService,
               private appComponent: AppComponent,
-              private session: SessionStorageService) {
-    this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
-      this.currentUser = user;
-    });
-  }
+              private storage: SessionStorageService) {}
+
 
   ngOnInit() {
-    this.currentUser = this.appComponent.currentUser;
-    this.currentProfile = this.appComponent.currentUser;
+    this.currentUser = this.storage.retrieve("currentUser");
+    this.storage.store("currentProfile", this.currentUser);
     this.loadAllUsers();
   }
 
@@ -38,7 +32,7 @@ export class ProfilesComponent implements OnInit {
   }
 
   onSelect(user: User): void {
-    this.currentProfile = user;
+    this.storage.store("currentProfile", user);
   }
 
   private loadAllUsers() {

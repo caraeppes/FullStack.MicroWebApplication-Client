@@ -26,22 +26,12 @@
 
 <div class="container-fluid">
   <div class="row" style="margin-top: 20px">
-    <div class="col-md-9">
+    <div class="col-md-8">
       <router-outlet></router-outlet>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h2 *ngIf="loggedIn">Notifications</h2>
       <app-notifications></app-notifications>
-
-      <!-- <hr />
-      <div class="card border-success mb-3 w-100" *ngIf="loggedIn">
-      <div class="card-header">All registered users:</div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item" *ngFor="let user of users">
-            {{user.firstName}} {{user.lastName}} | username: {{user.username}}
-          </li>
-        </ul>
-      </div> -->
 
     </div>
   </div>
