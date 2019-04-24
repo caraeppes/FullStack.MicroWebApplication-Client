@@ -37,6 +37,7 @@ export class ChatComponent implements OnInit {
     this.connect();
     this.channel = this.session.retrieve("currentChannel");
     this.getMessages();
+    this.messages.reverse();
     this.scrollToBottom();
   }
 
@@ -89,7 +90,6 @@ export class ChatComponent implements OnInit {
       messages.forEach(message => {
         this.messages.push(message);
       });
-      this.messages.reverse();
     });
   }
 
