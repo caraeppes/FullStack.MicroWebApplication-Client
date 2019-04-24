@@ -19,7 +19,7 @@
         <textarea id="edit" name="edit" rows="3" cols="50" [(ngModel)]="editedMessage">
           {{messageToEdit.messageContent}}
         </textarea><br>
-          <button (click)="editMessage(messageToEdit, editedMessage)">Save</button>
+          <button class="btn btn-info btn-sm" (click)="editMessage(messageToEdit, editedMessage)">Save</button>
 
     </div>
   </div>
@@ -34,4 +34,3 @@
 
 
 </div>
-

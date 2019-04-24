@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
               private userService: UserService,
               public session: SessionStorageService,
               private channelService: ChannelService) { }
-  
+
   ngOnInit() {
     this.validUser = false;
     this.submitted = false;
@@ -42,9 +42,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit(username: string) {
     if(this.allUsers.filter(user => user.username == username).length == 1) {
-      this.userService.loginUser(username).subscribe(user => {
-        console.log(user.username);
-      });
+      this.userService.loginUser(username).subscribe();
       this.userService.changeCurrentUser(username);
       this.session.store("currentUser", this.allUsers.filter(user => user.username == username)[0]);
       this.session.store("loggedIn", this.session.retrieve("currentUser") != null);
