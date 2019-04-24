@@ -61,7 +61,8 @@ export class PrivateChannelsComponent implements OnInit {
 
   add(user: User): void {
     let newChannel: Channel = new Channel();
-    console.log(newChannel.id);
+    newChannel.private = true;
+    newChannel.channelName = 'Private Message';
     this.channelService.addChannel(newChannel).subscribe(channel => {
         this.userService.joinChannel(user.username, channel.channelName).subscribe(() => {
           this.userService.joinChannel(this.currentUser.username, channel.channelName).subscribe(() => {

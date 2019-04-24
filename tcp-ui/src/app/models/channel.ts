@@ -3,6 +3,7 @@ export class Channel {
   channelName: string;
   users = [];
   userString = '';
+  private = false;
 
   constructor(){
   }

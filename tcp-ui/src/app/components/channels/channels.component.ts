@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 import {NotificationService} from "../../services/notification.service";
-import {forEach} from '@angular/router/src/utils/collection';
 import {SessionStorageService} from "ngx-webstorage";
 import { User } from '../../models/user';
-import { UserService } from '../../services/user.service';
-import { AppComponent } from '../../app.component';
 
 @Component({
   selector: 'app-channels',
