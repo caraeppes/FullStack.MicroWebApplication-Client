@@ -28,8 +28,8 @@
 <div class="card border-success mb-3" style="max-width: 20rem;">
   <div class="card-header">Available Private Messages</div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let privateChannel of privateChannels">
-      <a routerLink="/detail/{{privateChannel.id}}" (click)="updateChannel(privateChannel)">{{privateChannel.users}}</a>
+    <li class="list-group-item" *ngFor="let privateChannel of channels">
+      <a routerLink="/detail/{{privateChannel.id}}" (click)="updateChannel(privateChannel)">{{privateChannel.userString}}</a>
       <span class="badge badge-light" (click)="delete(privateChannel.id);">delete</span>
     </li>
   </ul>
