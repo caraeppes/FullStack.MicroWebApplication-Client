@@ -1,5 +1,3 @@
-import {PrivateChannel} from "./private-channel";
-
 export class User {
   id: number;
   firstName: string;
@@ -7,7 +5,6 @@ export class User {
   username: string;
   connected: boolean;
   channels: string[];
-  privateChannels: PrivateChannel[];
 
   constructor(){
     this.username = "";

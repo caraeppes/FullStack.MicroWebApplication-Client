@@ -14,7 +14,7 @@
   overflow-x:hidden;
   position:relative;
   height: 175px;
-  outline: 5px solid slateblue;
+  outline: 5px solid lightseagreen;
   outline-offset: 5px;
   word-wrap: break-word;
 }
@@ -29,13 +29,3 @@ label {
   margin-top: 10px;
 }
 
-.messages{
-  width:400px;
-  overflow-y:scroll;
-  overflow-x:hidden;
-  position:relative;
-  height: 175px;
-  outline: 5px solid slateblue;
-  outline-offset: 5px;
-  word-wrap: break-word;
-}

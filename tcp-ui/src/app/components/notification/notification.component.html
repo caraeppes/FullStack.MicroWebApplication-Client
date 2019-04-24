@@ -1,5 +1,10 @@
 <div *ngIf="notificationService.notifications.length">
-  <div *ngFor='let notification of notificationService.notifications'> {{notification}} </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item" *ngFor='let notification of notificationService.notifications'>
+       {{notification}}
+    </li>
+  </ul>
+
   <br>
   <button class="clear" (click)="notificationService.clear()">Clear</button>
   <br><br>
