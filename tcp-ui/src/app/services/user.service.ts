@@ -29,7 +29,7 @@ export class UserService {
 
   getUser(id: number): Observable<User> {
     return this.http.get<User>(`${this.usersUrl}/${id}`);
-
+  }
 
   joinChannel(username: string, channel: string): Observable<any> {
     let user: User;

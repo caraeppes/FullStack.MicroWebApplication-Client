@@ -30,6 +30,10 @@ export class AppComponent {
     this.loggedIn = this.session.retrieve("currentUser") != null;
   }
 
+  ngDoCheck(){
+    this.loggedIn = this.session.retrieve("loggedIn");
+  }
+
 
   title = 'ChatDragon';
 
@@ -38,8 +42,7 @@ export class AppComponent {
      this.userService.logoutUser(this.currentUser.username).subscribe(()=>{
        this.session.store("currentUser", null);
      });
-
-
+     this.session.store("loggedIn", false);
     this.notificationService.clear();
     this.router.navigate(['/login']);
   }

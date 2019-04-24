@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 import {NotificationService} from "../../services/notification.service";
-import {forEach} from '@angular/router/src/utils/collection';
 import {SessionStorageService} from "ngx-webstorage";
 import { User } from '../../models/user';
 import {Router} from "@angular/router";
@@ -39,7 +38,10 @@ export class ChannelsComponent implements OnInit {
   }
 
   add(channelName: string): void {
-    this.channelService.addChannel({channelName} as Channel)
+   let channel: Channel = JSON.parse(
+      "{\"channelName\" : \""+ channelName + "\"," +
+      "\"isPrivate\" : false}");
+    this.channelService.addChannel(channel)
       .subscribe(channel => {
         this.channels.push(channel);
         this.notificationService.add("Created channel: " + channel.channelName);
