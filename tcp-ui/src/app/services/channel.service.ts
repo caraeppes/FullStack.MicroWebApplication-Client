@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Channel} from "../models/channel";
 import {Observable, of, Subject} from 'rxjs';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {SessionStorageService} from 'ngx-webstorage';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -16,11 +17,16 @@ export class ChannelService {
   protected channelsUrl = '/server/channels';
   currentChannel: Subject<Channel> = new Subject<Channel>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private session: SessionStorageService) {
   }
 
   getChannels(): Observable<Channel[]> {
     return this.http.get<Channel[]>(this.channelsUrl);
+  }
+
+  getPrivateChannels(): Observable<Channel[]> {
+    return this.http.get<Channel[]>(`/server/channels/private/` + this.session.retrieve('currentUser').username);
   }
 
   getChannel(id: number): Observable<Channel> {

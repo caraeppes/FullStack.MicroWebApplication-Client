@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {PrivateChannel} from '../../models/private-channel';
-import {PrivateChannelService} from '../../services/private-channel.service';
 import {NotificationService} from '../../services/notification.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user';
 import {SessionStorageService} from 'ngx-webstorage';
+import {Channel} from '../../models/channel';
+import {ChannelService} from '../../services/channel.service';
 
 @Component({
   selector: 'app-private-channels',
@@ -13,14 +13,14 @@ import {SessionStorageService} from 'ngx-webstorage';
 })
 export class PrivateChannelsComponent implements OnInit {
 
-  privateChannels: PrivateChannel[] = [];
+  channels: Channel[] = [];
   currentUser: User;
-  currentChannel: PrivateChannel;
-  query: String;
+  currentChannel: Channel;
+  query: string;
   users: User[] = [];
-  displayChat: boolean = false;
+  displayChat = false;
 
-  constructor(private privateChannelService: PrivateChannelService,
+  constructor(private channelService: ChannelService,
               private notificationService: NotificationService,
               private userService: UserService,
               private sessionStorageService: SessionStorageService) {
@@ -37,35 +37,35 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   getChannels(): void {
-    this.privateChannelService.getChannelsByUser()
+    this.channelService.getPrivateChannels()
       .subscribe(privateChannelsOfUser => {
         privateChannelsOfUser.forEach(privateChannel => {
           this.setUsersString(privateChannel);
-          this.privateChannels.push(privateChannel);
+          this.channels.push(privateChannel);
         });
       });
   }
 
-  setUsersString(privateChannel: PrivateChannel): void {
-    privateChannel.users = '';
-    this.userService.getUsersSubscribedToPrivateChannel(privateChannel.id)
+  setUsersString(channel: Channel): void {
+    channel.userString = '';
+    this.userService.getUsersSubscribedToChannel(channel.id)
       .subscribe(users => {
         users.forEach(user => {
           if (user.username !== this.currentUser.username) {
-            privateChannel.users += user.firstName + ', ';
+            channel.userString += user.firstName + ', ';
           }
         });
-        privateChannel.users = privateChannel.users.substring(0, privateChannel.users.length - 2);
+        channel.userString = channel.userString.substring(0, channel.userString.length - 2);
       });
   }
 
   add(user: User): void {
-    let newChannel: PrivateChannel = new PrivateChannel();
+    let newChannel: Channel = new Channel();
     console.log(newChannel.id);
-    this.privateChannelService.addChannel(newChannel).subscribe(privateChannel => {
-        this.userService.joinPrivateChannel(user, privateChannel).subscribe(() => {
-          this.userService.joinPrivateChannel(this.currentUser, privateChannel).subscribe(() => {
-            this.setUsersString(privateChannel);
+    this.channelService.addChannel(newChannel).subscribe(channel => {
+        this.userService.joinChannel(user.username, channel.channelName).subscribe(() => {
+          this.userService.joinChannel(this.currentUser.username, channel.channelName).subscribe(() => {
+            this.setUsersString(channel);
           });
         });
       });
@@ -73,13 +73,13 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   delete(id: number): void {
-    this.privateChannels = this.privateChannels.filter(c => c.id !== id);
-    this.privateChannelService.deleteChannel(id).subscribe();
-    this.notificationService.add('Deleted privateChannel');
+    this.channels = this.channels.filter(c => c.id !== id);
+    this.channelService.deleteChannel(id).subscribe();
+    this.notificationService.add('Deleted private message');
   }
 
-  updateChannel(privateChannel: PrivateChannel): void {
-    this.privateChannelService.updateCurrentChannel(privateChannel);
+  updateChannel(channel: Channel): void {
+    this.channelService.updateCurrentChannel(channel);
   }
 
   search() {
