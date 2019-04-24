@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder,  FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 import {UserService} from "../../services/user.service";
-import {NotificationService} from "../../services/notification.service";
 import {Router} from "@angular/router";
 import {User} from "../../models/user";
 import {ChannelService} from '../../services/channel.service';
+import {SessionStorageService} from "ngx-webstorage";
 
 @Component({
   selector: 'app-register',
@@ -14,14 +14,15 @@ import {ChannelService} from '../../services/channel.service';
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  allUsers: User[] =[];
+  allUsers: User[] = [];
   validUser: boolean;
   submitted: boolean;
 
   constructor(private userService: UserService,
               private formBuilder: FormBuilder,
               private router: Router,
-              private channelService: ChannelService) {
+              private channelService: ChannelService,
+              private storage: SessionStorageService) {
   }
 
   ngOnInit() {
@@ -35,7 +36,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  getAllUsers(){
+  getAllUsers() {
     this.userService.getUsers().subscribe(users => {
       this.allUsers = users;
       console.log(this.allUsers);
@@ -44,28 +45,20 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit(username: string) {
-    if(this.allUsers.filter(user => user.username == username).length == 0) {
+    if (this.allUsers.filter(user => user.username == username).length == 0) {
       this.validUser = true;
       this.userService.registerUser(this.registerForm.value).subscribe(user => {
-        this.userService.changeCurrentUser(user.username);
-        this.channelService.addDefaultChannel()
-          .subscribe(channel => console.log(channel));
-        setTimeout(() => {
-          this.userService.joinChannel(username, 'Main Channel')
-            .subscribe(subscribedUser => console.log(subscribedUser));
-        }, 200);
-        this.userService.loginUser(username).subscribe();
+        this.storage.store("currentUser", user);
+        this.storage.store("loggedin", true);
+        this.channelService.addDefaultChannel().subscribe();
+        this.userService.joinChannel(user.username, 'Main Channel').subscribe();
+        this.userService.loginUser(username).subscribe(() => {
+          this.router.navigate(['/home']);
+        });
       });
-      setTimeout(() => {
-        this.router.navigate(['/home']);
-      }, 200)
-
     }
     this.submitted = true;
   }
-
-
-
 
 
 }

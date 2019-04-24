@@ -91,6 +91,7 @@ export class ChatComponent implements OnInit {
       messages.forEach(message => {
         this.messages.push(message);
       });
+      this.messages.reverse();
     });
   }
 

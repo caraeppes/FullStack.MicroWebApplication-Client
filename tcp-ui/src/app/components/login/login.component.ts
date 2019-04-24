@@ -42,12 +42,13 @@ export class LoginComponent implements OnInit {
 
   onSubmit(username: string) {
     if(this.allUsers.filter(user => user.username == username).length == 1) {
-      this.userService.loginUser(username).subscribe();
-      this.session.store("currentUser", this.allUsers.filter(user => user.username == username)[0]);
-      this.session.store("loggedIn", this.session.retrieve("currentUser") != null);
-      this.validUser = true;
-      this.router.navigate(['/home']);
-      this.channelService.addDefaultChannel().subscribe(channel => {
+      this.userService.loginUser(username).subscribe(user => {
+        this.session.store("currentUser", user);
+        this.session.store("loggedIn", user != null);
+        this.validUser = true;
+        this.router.navigate(['/home']);
+      });
+      this.channelService.addDefaultChannel().subscribe(()=> {
         this.userService.joinChannel(username, 'Main Channel').subscribe();
       });
     }

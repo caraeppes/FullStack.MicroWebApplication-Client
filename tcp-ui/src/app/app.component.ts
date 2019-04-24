@@ -36,7 +36,6 @@ export class AppComponent {
   logout() {
     this.currentUser = this.session.retrieve("currentUser");
      this.userService.logoutUser(this.currentUser.username).subscribe(()=>{
-       this.userService.changeCurrentUser(null);
        this.session.store("currentUser", null);
      });
 

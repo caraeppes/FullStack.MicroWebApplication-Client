@@ -1,5 +1,6 @@
-<h3>{{currentProfile.firstName}}'s Profile</h3>
+<div style="text-align: center;"><h2>{{currentProfile.firstName}}'s Profile</h2>
 <p><strong>First Name: </strong>{{currentProfile.firstName}}</p>
 <p><strong>Last Name: </strong>{{currentProfile.lastName}}</p>
 <p><strong>User Name: </strong>{{currentProfile.username}}</p>
 <span *ngIf="currentProfile.connected" class="badge badge-success">online</span>
+</div>
