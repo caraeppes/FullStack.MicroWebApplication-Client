@@ -21,7 +21,7 @@ export class ChannelDetailComponent implements OnInit {
   channel: Channel;
   currentUser: User;
   messages: Message[] = [];
-  subscribed: boolean = false;
+  subscribed = false;
 
   constructor(private activatedRoute: ActivatedRoute,
               private location: Location,

@@ -5,7 +5,4 @@ export class Channel {
 
   userString = '';
   private = false;
-
-  constructor() {
-  }
 }

@@ -92,8 +92,8 @@ export class PrivateChannelsComponent implements OnInit, OnChanges {
       this.users = [];
       this.userService.getUsers().subscribe(users => {
         users.filter(user =>
-          (user.username.toLowerCase() == this.query || user.firstName.toLowerCase() == this.query ||
-            user.lastName.toLowerCase() == this.query || user.firstName.toLowerCase() + ' ' + user.lastName.toLowerCase() == this.query)
+          (user.username.toLowerCase() === this.query || user.firstName.toLowerCase() === this.query ||
+            user.lastName.toLowerCase() === this.query || user.firstName.toLowerCase() + ' ' + user.lastName.toLowerCase() === this.query)
         ).map(user => {
           this.users.push(user);
         });

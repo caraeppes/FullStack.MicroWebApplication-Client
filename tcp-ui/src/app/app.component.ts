@@ -13,6 +13,10 @@ import {SessionStorageService} from 'ngx-webstorage';
 })
 export class AppComponent implements DoCheck {
 
+  currentUser: User;
+  currentChannel: Channel;
+  loggedIn: boolean;
+
   constructor(private router: Router,
               private userService: UserService,
               private notificationService: NotificationService,
@@ -24,10 +28,6 @@ export class AppComponent implements DoCheck {
     this.loggedIn = this.session.retrieve('currentUser') != null;
   }
 
-  currentUser: User;
-  currentChannel: Channel;
-  loggedIn: boolean;
-
   title = 'ChatDragon';
 
   ngDoCheck() {
@@ -36,10 +36,10 @@ export class AppComponent implements DoCheck {
 
   logout() {
     this.currentUser = this.session.retrieve('currentUser');
-    this.userService.logoutUser(this.currentUser.username).subscribe(() => {
+    this.userService.logoutUser(this.currentUser.username).subscribe(() =>{
        this.session.store('currentUser', null);
-       this.session.store('loggedIn', false);
      });
+    this.session.store('loggedIn', false);
     this.notificationService.clear();
     this.router.navigate(['/login']);
   }
