@@ -41,4 +41,5 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

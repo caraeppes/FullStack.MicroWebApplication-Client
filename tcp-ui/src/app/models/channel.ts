@@ -4,6 +4,7 @@ export class Channel {
   users = [];
 
   userString = '';
+  private = false;
 
   constructor() {
   }
