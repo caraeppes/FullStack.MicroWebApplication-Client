@@ -1,7 +1,6 @@
 <body>
 <h2>Log in</h2>
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.controls.username.value)">
-
   <div class="form-group">
     <label for="username">Username: </label>
     <input id="username" type="text" formControlName="username"  autocomplete="off" class="form-control" />

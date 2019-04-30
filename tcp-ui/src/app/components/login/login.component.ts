@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
         this.validUser = true;
         this.router.navigate(['/home']);
       });
-      this.channelService.addDefaultChannel().subscribe(()=> {
+      this.channelService.addDefaultChannel().subscribe(() => {
         this.userService.joinChannel(username, 'Main Channel').subscribe();
       });
     }

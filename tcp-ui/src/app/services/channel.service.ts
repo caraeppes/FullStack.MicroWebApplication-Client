@@ -41,6 +41,10 @@ export class ChannelService {
     return this.http.post<Channel>(`/server/channels/default`, httpOptions);
   }
 
+  updateChannel(id: number, channelName: string): Observable<Channel> {
+    return this.http.put<Channel>(`server/channels/${id}/update/?channelName=` + channelName, httpOptions);
+  }
+
   deleteChannel(id: number): Observable<Channel> {
     return this.http.delete<Channel>(`/server/channels/${id}`, httpOptions);
   }

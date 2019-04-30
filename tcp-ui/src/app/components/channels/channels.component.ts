@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Channel} from "../../models/channel";
 import { ChannelService} from "../../services/channel.service";
 import {NotificationService} from "../../services/notification.service";
+import {forEach} from '@angular/router/src/utils/collection';
 import {SessionStorageService} from "ngx-webstorage";
 import { User } from '../../models/user';
 import {Router} from "@angular/router";
@@ -25,11 +26,11 @@ export class ChannelsComponent implements OnInit {
     this.getChannels();
     this.user = this.session.retrieve("currentUser");
     this.channelService.addDefaultChannel()
-        .subscribe(channel => {
-          if (channel != null) {
-            this.channels.push(channel);
-          }
-        });
+      .subscribe(channel => {
+        if (channel != null) {
+          this.channels.push(channel);
+        }
+      });
   }
 
   getChannels(): void {

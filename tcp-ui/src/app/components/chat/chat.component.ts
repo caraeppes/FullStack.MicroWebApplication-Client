@@ -16,7 +16,7 @@ import {SessionStorageService} from "ngx-webstorage";
 })
 export class ChatComponent implements OnInit {
 
-  messages: Message[] =[];
+  messages: Message[] = [];
   ws: any;
   message: string;
   editedMessage: string;

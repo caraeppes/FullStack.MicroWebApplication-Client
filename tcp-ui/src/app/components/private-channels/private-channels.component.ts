@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {NotificationService} from '../../services/notification.service';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user';
@@ -13,14 +13,13 @@ import {allowNewBindingsForStylingContext} from "@angular/core/src/render3/styli
   templateUrl: './private-channels.component.html',
   styleUrls: ['./private-channels.component.css']
 })
-export class PrivateChannelsComponent implements OnInit {
+export class PrivateChannelsComponent implements OnInit, OnChanges {
 
   channels: Channel[] = [];
   currentUser: User;
   currentChannel: Channel;
   query: string;
   users: User[] = [];
-  displayChat = false;
 
   constructor(private channelService: ChannelService,
               private notificationService: NotificationService,
@@ -31,10 +30,10 @@ export class PrivateChannelsComponent implements OnInit {
   ngOnInit() {
     this.getChannels();
     this.currentUser = this.sessionStorageService.retrieve('currentUser');
-    this.sessionStorageService.store("privateChannel", null);
+    this.sessionStorageService.store('privateChannel', null);
   }
 
-  ngOnChanges(){
+  ngOnChanges() {
     this.getChannels();
   }
 
@@ -62,6 +61,7 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   add(user: User): void {
+<<<<<<< HEAD
     let channelName:string  = "Private Channel: " + user.firstName + " & " + this.currentUser.firstName;
     this.channelService.addChannel(JSON.parse("{\"channelName\" : \"" + channelName +"\"," +
       "\"isPrivate\" : \"true\"}")).subscribe(c => {
@@ -71,12 +71,26 @@ export class PrivateChannelsComponent implements OnInit {
             console.log(channel);
             this.sessionStorageService.store("currentChannel", channel);
             this.setUsersString(channel);
+=======
+    let newChannel: Channel = new Channel();
+    newChannel.private = true;
+    this.channelService.addChannel(newChannel).subscribe(channel => {
+      newChannel.channelName = 'Private Message ' + channel.id;
+      this.channelService.updateChannel(channel.id, newChannel.channelName).subscribe((c) => {
+        this.userService.joinChannel(user.username, c.channelName).subscribe(() => {
+          this.userService.joinChannel(this.currentUser.username, c.channelName).subscribe(() => {
+            channel.userString = user.firstName;
+            channel.channelName = newChannel.channelName;
+>>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
             this.channels.push(channel);
           });
         });
       });
     });
+<<<<<<< HEAD
     this.displayChat = true;
+=======
+>>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
   }
 
   delete(id: number): void {
@@ -86,7 +100,11 @@ export class PrivateChannelsComponent implements OnInit {
   }
 
   updateChannel(channel: Channel): void {
+<<<<<<< HEAD
     this.sessionStorageService.store("currentChannel", channel);
+=======
+    this.sessionStorageService.store('currentChannel', channel);
+>>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
     this.currentChannel = channel;
   }
 
@@ -96,8 +114,8 @@ export class PrivateChannelsComponent implements OnInit {
       this.users = [];
       this.userService.getUsers().subscribe(users => {
         users.filter(user =>
-          (user.username.toLowerCase() == this.query || user.firstName.toLowerCase() == this.query ||
-            user.lastName.toLowerCase() == this.query || user.firstName.toLowerCase() + " " + user.lastName.toLowerCase() == this.query)
+          (user.username.toLowerCase() === this.query || user.firstName.toLowerCase() === this.query ||
+            user.lastName.toLowerCase() === this.query || user.firstName.toLowerCase() + ' ' + user.lastName.toLowerCase() === this.query)
         ).map(user => {
           this.users.push(user);
         });

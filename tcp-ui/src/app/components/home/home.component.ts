@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private appComponent: AppComponent,
-    private session: SessionStorageService) {}
+    private session: SessionStorageService,) {}
 
   ngOnInit() {
     this.currentUser = this.session.retrieve("currentUser");
