@@ -6,5 +6,5 @@ export class Channel {
   users: User[] = [];
 
   userString = '';
-  isPrivate: boolean;
+  private: boolean;
 }

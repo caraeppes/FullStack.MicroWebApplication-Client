@@ -61,17 +61,6 @@ export class PrivateChannelsComponent implements OnInit, OnChanges {
   }
 
   add(user: User): void {
-<<<<<<< HEAD
-    let channelName:string  = "Private Channel: " + user.firstName + " & " + this.currentUser.firstName;
-    this.channelService.addChannel(JSON.parse("{\"channelName\" : \"" + channelName +"\"," +
-      "\"isPrivate\" : \"true\"}")).subscribe(c => {
-      this.channelService.makePrivate(c).subscribe(channel => {
-        this.userService.joinChannel(user.username, channel.channelName).subscribe(() => {
-          this.userService.joinChannel(this.currentUser.username, channel.channelName).subscribe(() => {
-            console.log(channel);
-            this.sessionStorageService.store("currentChannel", channel);
-            this.setUsersString(channel);
-=======
     let newChannel: Channel = new Channel();
     newChannel.private = true;
     this.channelService.addChannel(newChannel).subscribe(channel => {
@@ -81,16 +70,11 @@ export class PrivateChannelsComponent implements OnInit, OnChanges {
           this.userService.joinChannel(this.currentUser.username, c.channelName).subscribe(() => {
             channel.userString = user.firstName;
             channel.channelName = newChannel.channelName;
->>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
             this.channels.push(channel);
           });
         });
       });
     });
-<<<<<<< HEAD
-    this.displayChat = true;
-=======
->>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
   }
 
   delete(id: number): void {
@@ -100,11 +84,7 @@ export class PrivateChannelsComponent implements OnInit, OnChanges {
   }
 
   updateChannel(channel: Channel): void {
-<<<<<<< HEAD
     this.sessionStorageService.store("currentChannel", channel);
-=======
-    this.sessionStorageService.store('currentChannel', channel);
->>>>>>> c8981368c64facfcf63fdccb2b17699e9fa7f5fa
     this.currentChannel = channel;
   }
 
